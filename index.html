@@ -422,21 +422,30 @@
   // ko 원문 백업 (첫 로드 시 DOM 에서 수집 — 사전 이중 관리 방지). alt 도 같은 방식.
   document.querySelectorAll('[data-i18n]').forEach((el) => { I18N.ko[el.dataset.i18n] = el.innerHTML; });
   document.querySelectorAll('[data-i18n-alt]').forEach((el) => { I18N.ko[el.dataset.i18nAlt] = el.alt; });
-  document.querySelectorAll('.langs button').forEach((btn) => {
-    btn.addEventListener('click', () => {
-      const lang = btn.dataset.lang;
-      document.documentElement.lang = lang;
-      document.querySelectorAll('.langs button').forEach((b) => b.setAttribute('aria-pressed', String(b === btn)));
-      document.querySelectorAll('[data-i18n]').forEach((el) => {
-        const v = I18N[lang][el.dataset.i18n];
-        if (v !== undefined) el.innerHTML = v;
-      });
-      document.querySelectorAll('[data-i18n-alt]').forEach((el) => {
-        const v = I18N[lang][el.dataset.i18nAlt];
-        if (v !== undefined) el.alt = v;
-      });
+  // 언어 적용을 한 곳으로 — 클릭과 첫 로드가 **같은 경로**를 쓴다.
+  //   두 벌로 두면 한쪽만 고쳐질 때 "버튼은 영어인데 본문은 한글" 같은 게 생긴다.
+  function applyLang(lang) {
+    document.documentElement.lang = lang;
+    document.querySelectorAll('.langs button').forEach((b) => {
+      b.setAttribute('aria-pressed', String(b.dataset.lang === lang));
     });
+    document.querySelectorAll('[data-i18n]').forEach((el) => {
+      const v = I18N[lang][el.dataset.i18n];
+      if (v !== undefined) el.innerHTML = v;
+    });
+    document.querySelectorAll('[data-i18n-alt]').forEach((el) => {
+      const v = I18N[lang][el.dataset.i18nAlt];
+      if (v !== undefined) el.alt = v;
+    });
+  }
+  document.querySelectorAll('.langs button').forEach((btn) => {
+    btn.addEventListener('click', () => applyLang(btn.dataset.lang));
   });
+  // 기본 = 영어 (사용자 확정 2026-08-24). HTML 본문은 계속 한국어가 원본이라
+  //   `I18N.ko` 를 DOM 에서 긁는 위 로직이 그대로 살아 있다 — 순서상 긁기가 먼저다.
+  //   ⚠️ 정적 `<html lang="ko">` 는 그대로 둔다: JS 가 실패하면 본문이 한국어인데
+  //     lang 만 en 이 되어 서로 어긋나기 때문. JS 가 돌면 여기서 en 으로 바꾼다.
+  applyLang('en');
 </script>
 </body>
 </html>
