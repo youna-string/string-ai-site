@@ -13,8 +13,16 @@
     `x-content-type-options: nosniff` + `content-security-policy: default-src 'none'; sandbox`
     로 내린다(피싱 호스팅 방지). 함수가 text/html 을 명시해도 덮어쓴다 — 재배포로도 안 바뀜(실측).
     그 결과 부모 화면엔 HTML 소스가 글자로 보였고 sandbox 가 폼 제출까지 막아
-    **2026-08-21 이후 부모동의가 구조적으로 불가능**했다(발송 8건 전부 verified 0).
+    2026-08-21 이후 부모동의가 구조적으로 불가능했다(발송 8건 전부 verified 0).
     → 페이지는 진짜 text/html 을 내는 이 도메인이 담당하고, Edge 는 302 + JSON API 만 한다.
+
+  ■ 디자인 = 동의 요청 메일과 같은 토큰 (supabase/functions/_shared/email.ts 의 PALETTE/FONT)
+    부모는 그 메일을 보고 이 페이지로 넘어온다. 다른 디자인이 뜨면 피싱처럼 보인다.
+    bg #F5F1E3 / card #FFFBF0 / heading #2E2A24 / body #5C5346 / detail #8A7F6E /
+    note #A89C88 / gold #D2A964(기본) / danger #B0685C(철회), 카드 radius 16, 버튼 radius 12,
+    최대폭 480, 워드마크 "🎻 String AI".
+    ⚠️ 색·폰트를 여기서 새로 만들지 말 것 — 바꿔야 하면 email.ts 와 **같이** 바꾼다.
+    버튼 라벨만 메일과 다르게 두 줄로 쌓는다(웹은 폭 여유가 있고 한글이 먼저 읽혀야 한다).
 
   ■ 상태를 바꾸는 건 POST 뿐 (COPPA)
     메일 보안 스캐너(SafeLinks·Mimecast·Gmail 프리페치)가 링크를 자동 GET 한다.
@@ -25,45 +33,58 @@
 -->
 <style>
   :root {
-    --cream: #faf6ef; --card: #ffffff; --line: #e8e0d0;
-    --ink: #2b2b2b; --muted: #666; --gold: #d4af7a; --green: #2e7d32; --red: #b3261e;
+    --bg: #F5F1E3;
+    --card: #FFFBF0;
+    --heading: #2E2A24;
+    --body: #5C5346;
+    --detail: #8A7F6E;
+    --note: #A89C88;
+    --gold: #D2A964;
+    --danger: #B0685C;
   }
   * { box-sizing: border-box; }
+  html, body { background: var(--bg); }
   body {
-    margin: 0; background: var(--cream); color: var(--ink);
-    font-family: -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', 'Segoe UI', Roboto, sans-serif;
-    line-height: 1.6;
+    margin: 0;
+    font-family: -apple-system, 'Segoe UI', Roboto, sans-serif;
+    color: var(--body);
+    /* 한글은 어절 단위로 끊는다 — keep-all 이 없으면 "누르셔/야" 처럼 단어 중간이 잘린다. */
+    word-break: keep-all;
+    overflow-wrap: break-word;
+    -webkit-text-size-adjust: 100%;
   }
-  .wrap { max-width: 560px; margin: 0 auto; padding: 40px 20px 64px; }
-  .brand { text-align: center; font-size: 15px; letter-spacing: .04em; color: var(--muted); margin: 0 0 20px; }
-  .card {
-    background: var(--card); border: 1px solid var(--line); border-radius: 16px;
-    padding: 32px 26px; box-shadow: 0 1px 3px rgba(0,0,0,.04);
+  .wrap { max-width: 480px; margin: 0 auto; padding: 32px 16px 40px; }
+  .mark {
+    padding: 0 4px 14px;
+    font-size: 16px; font-weight: 700; letter-spacing: .3px;
+    color: var(--heading);
   }
-  h1 { font-size: 21px; margin: 0 0 14px; font-weight: 700; }
-  h2 { font-size: 17px; margin: 0 0 10px; font-weight: 600; }
-  p  { font-size: 15px; margin: 0 0 16px; }
-  .en { color: var(--muted); font-size: 14px; }
-  hr { border: 0; border-top: 1px solid #eee; margin: 26px 0; }
-  button {
-    font: inherit; font-size: 17px; font-weight: 600; width: 100%;
-    padding: 15px 24px; border: 0; border-radius: 12px; color: #fff;
-    background: var(--green); cursor: pointer; margin-top: 4px;
+  .card { background: var(--card); border-radius: 16px; padding: 28px 24px; }
+  h1 { margin: 0 0 4px; font-size: 20px; line-height: 1.4; font-weight: 700; color: var(--heading); }
+  .sub { margin: 0 0 16px; font-size: 14px; line-height: 1.5; color: var(--detail); }
+  .body { margin: 0 0 12px; font-size: 14px; line-height: 1.6; color: var(--body); }
+  .body .en { color: var(--body); }
+  .btn {
+    display: block; width: 100%; margin: 16px 0 4px;
+    border: 0; border-radius: 12px; padding: 13px 16px;
+    background: var(--gold); color: #FFFFFF;
+    font-family: inherit; cursor: pointer; text-align: center;
   }
-  button.danger { background: var(--red); }
-  button:disabled { opacity: .55; cursor: default; }
-  .icon { font-size: 22px; margin-right: 6px; }
-  .muted { color: var(--muted); font-size: 13px; margin: 18px 0 0; }
-  .spin { text-align: center; color: var(--muted); padding: 28px 0; font-size: 15px; }
+  .btn.danger { background: var(--danger); }
+  .btn:disabled { opacity: .5; cursor: default; }
+  .btn .ko { display: block; font-size: 16px; font-weight: 600; line-height: 1.35; }
+  .btn .en { display: block; font-size: 13px; font-weight: 500; line-height: 1.35; opacity: .85; margin-top: 2px; }
+  .note { padding: 16px 4px 0; font-size: 12px; line-height: 1.6; color: var(--note); }
+  .loading { font-size: 14px; line-height: 1.6; color: var(--detail); text-align: center; padding: 12px 0; }
 </style>
 </head>
 <body>
 <div class="wrap">
-  <p class="brand">String AI</p>
+  <div class="mark">🎻 String AI</div>
   <div class="card" id="card">
-    <div class="spin" id="boot">불러오는 중… · Loading…</div>
+    <p class="loading">불러오는 중입니다<br/>Loading…</p>
   </div>
-  <p class="muted" id="foot"></p>
+  <div class="note" id="note"></div>
 </div>
 
 <script>
@@ -71,11 +92,18 @@
   'use strict';
 
   var API = 'https://yopimhenbkuniwfsqiyp.supabase.co/functions/v1/verify-parent-consent';
+  var FOOT =
+    'String AI 에서 자동으로 보내는 안내입니다 · 문의: stringaiapp@gmail.com<br/>' +
+    'This is an automated message from String AI · Support: stringaiapp@gmail.com';
+  var GUARD =
+    '이 페이지를 여는 것만으로는 아무것도 처리되지 않습니다. 버튼을 누르셔야 완료됩니다.<br/>' +
+    'Opening this page alone changes nothing — the button completes it.';
+
   var q = new URLSearchParams(location.search);
   var token = q.get('token') || '';
   var action = q.get('action') === 'revoke' ? 'revoke' : 'verify';
   var card = document.getElementById('card');
-  var foot = document.getElementById('foot');
+  var note = document.getElementById('note');
 
   function esc(s) {
     return String(s == null ? '' : s)
@@ -83,7 +111,7 @@
       .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
   }
 
-  function url(method) {
+  function url() {
     return API + '?token=' + encodeURIComponent(token) +
            '&action=' + encodeURIComponent(action) + '&format=json';
   }
@@ -91,40 +119,39 @@
   // 서버가 못 답할 때만 쓰는 최소 문구. 정상 경로의 모든 문구는 서버가 준다.
   var OFFLINE = {
     ok: false,
-    titleKo: '연결할 수 없습니다', titleEn: 'Cannot connect',
-    bodyKo: '인터넷 연결을 확인하시고 잠시 후 다시 시도해 주세요.',
-    bodyEn: 'Please check your connection and try again in a moment.'
+    titleKo: '연결이 잠시 끊겼어요', titleEn: 'Connection problem',
+    bodyKo: '인터넷 연결을 확인하신 뒤 이 페이지를 새로고침해 주세요.',
+    bodyEn: 'Please check your connection and refresh this page.'
   };
 
   function draw(o, busy) {
-    var icon = o.ok ? '✓' : '✗';
     var html =
-      '<h1><span class="icon">' + icon + '</span>' + esc(o.titleKo) + '</h1>' +
-      '<p>' + esc(o.bodyKo) + '</p>';
+      '<h1>' + esc(o.titleKo) + '</h1>' +
+      '<p class="sub">' + esc(o.titleEn) + '</p>' +
+      '<p class="body">' + esc(o.bodyKo) + '<br/><span class="en">' + esc(o.bodyEn) + '</span></p>';
+
     if (o.confirm) {
-      html += '<button id="go"' + (busy ? ' disabled' : '') +
-              (o.confirm.danger ? ' class="danger"' : '') + '>' +
-              (busy ? '처리 중… · Working…'
-                    : esc(o.confirm.labelKo) + ' · ' + esc(o.confirm.labelEn)) +
+      html += '<button class="btn' + (o.confirm.danger ? ' danger' : '') + '" id="go"' +
+              (busy ? ' disabled' : '') + '>' +
+              (busy
+                ? '<span class="ko">처리 중입니다</span><span class="en">Working…</span>'
+                : '<span class="ko">' + esc(o.confirm.labelKo) + '</span>' +
+                  '<span class="en">' + esc(o.confirm.labelEn) + '</span>') +
               '</button>';
     }
-    html += '<hr><h2>' + icon + ' ' + esc(o.titleEn) + '</h2>' +
-            '<p class="en">' + esc(o.bodyEn) + '</p>';
     card.innerHTML = html;
 
     var go = document.getElementById('go');
     if (go && !busy) go.addEventListener('click', function () { submit(o); });
 
-    foot.textContent = o.confirm
-      ? '이 페이지를 여는 것만으로는 아무것도 처리되지 않습니다. 버튼을 누르셔야 완료됩니다. · Opening this page alone changes nothing; the button completes it.'
-      : '';
+    note.innerHTML = (o.confirm ? GUARD + '<br/><br/>' : '') + FOOT;
   }
 
   function submit(prev) {
     draw(prev, true);
     fetch(url(), { method: 'POST', headers: { 'Content-Type': 'application/json' } })
       .then(function (r) { return r.json(); })
-      .then(function (o) { draw(o, false); })
+      .then(function (o) { draw(o, false); window.scrollTo(0, 0); })
       .catch(function () { draw(OFFLINE, false); });
   }
 
