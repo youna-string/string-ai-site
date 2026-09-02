@@ -30,6 +30,10 @@
 
   ■ 문구는 서버가 준다
     ko/en 본문을 Edge 응답(JSON)에서 그대로 받아 쓴다 — 문구가 두 군데로 갈라지지 않게.
+
+  ■ 한 언어만 보여 준다 (2026-09-02)
+    메일이 수신자 언어 하나로 가므로 이 페이지도 같은 언어 하나로 그린다. 언어 = 링크의 ?lang=(메일이 실어 옴),
+    서버 JSON 의 lang(옛 링크: 학생 프로필 언어)이 있으면 그것. 둘 다 없으면 ko.
 -->
 <style>
   :root {
@@ -72,8 +76,7 @@
   }
   .btn.danger { background: var(--danger); }
   .btn:disabled { opacity: .5; cursor: default; }
-  .btn .ko { display: block; font-size: 16px; font-weight: 600; line-height: 1.35; }
-  .btn .en { display: block; font-size: 13px; font-weight: 500; line-height: 1.35; opacity: .85; margin-top: 2px; }
+  .btn { font-size: 16px; font-weight: 600; line-height: 1.35; }
   .note { padding: 16px 4px 0; font-size: 12px; line-height: 1.6; color: var(--note); }
   .loading { font-size: 14px; line-height: 1.6; color: var(--detail); text-align: center; padding: 12px 0; }
 </style>
@@ -82,7 +85,7 @@
 <div class="wrap">
   <div class="mark">🎻 String AI</div>
   <div class="card" id="card">
-    <p class="loading">불러오는 중입니다<br/>Loading…</p>
+    <p class="loading" id="loading">불러오는 중이에요…</p>
   </div>
   <div class="note" id="note"></div>
 </div>
@@ -92,12 +95,20 @@
   'use strict';
 
   var API = 'https://yopimhenbkuniwfsqiyp.supabase.co/functions/v1/verify-parent-consent';
-  var FOOT =
-    'String AI 에서 자동으로 보내는 안내입니다 · 문의: stringaiapp@gmail.com<br/>' +
-    'This is an automated message from String AI · Support: stringaiapp@gmail.com';
-  var GUARD =
-    '이 페이지를 여는 것만으로는 아무것도 처리되지 않습니다. 버튼을 누르셔야 완료됩니다.<br/>' +
-    'Opening this page alone changes nothing — the button completes it.';
+  var T = {
+    ko: {
+      title: 'String AI — 보호자 동의', loading: '불러오는 중이에요…', working: '처리 중이에요…',
+      guard: '이 페이지를 여는 것만으로는 아무것도 바뀌지 않아요. 버튼을 눌러야 완료돼요.',
+      foot: 'String AI에서 자동으로 보낸 안내예요 · 문의: stringaiapp@gmail.com',
+      offTitle: '연결이 잠시 끊겼어요', offBody: '인터넷 연결을 확인한 뒤 이 페이지를 새로고침해 주세요.'
+    },
+    en: {
+      title: 'String AI — Parental consent', loading: 'Loading…', working: 'Working…',
+      guard: 'Opening this page changes nothing. Pressing the button completes it.',
+      foot: 'Automated message from String AI · Questions? stringaiapp@gmail.com',
+      offTitle: 'Connection problem', offBody: 'Please check your connection and refresh this page.'
+    }
+  };
 
   var q = new URLSearchParams(location.search);
   var token = q.get('token') || '';
@@ -105,49 +116,53 @@
   var ALLOWED_ACTIONS = ['verify', 'revoke', 'approve_link', 'decline_link'];
   var actionParam = q.get('action') || 'verify';
   var action = ALLOWED_ACTIONS.indexOf(actionParam) >= 0 ? actionParam : 'verify';
+  var langParam = q.get('lang');
+  var lang = 'ko';
   var card = document.getElementById('card');
   var note = document.getElementById('note');
+
+  function applyLang(l) {
+    lang = l === 'en' ? 'en' : 'ko';
+    document.documentElement.lang = lang;
+    document.title = T[lang].title;
+  }
+  applyLang(langParam);
+  document.getElementById('loading').textContent = T[lang].loading;
 
   function esc(s) {
     return String(s == null ? '' : s)
       .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
       .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
   }
+  // 서버 JSON 의 ko/en 슬롯에서 현재 언어 것을 고른다(없으면 다른 언어로 폴백).
+  function pick(o, key) {
+    var a = lang === 'en' ? o[key + 'En'] : o[key + 'Ko'];
+    var b = lang === 'en' ? o[key + 'Ko'] : o[key + 'En'];
+    return a || b || '';
+  }
 
   function url() {
     return API + '?token=' + encodeURIComponent(token) +
-           '&action=' + encodeURIComponent(action) + '&format=json';
+           '&action=' + encodeURIComponent(action) + '&format=json' +
+           (langParam ? '&lang=' + encodeURIComponent(langParam) : '');
   }
 
-  // 서버가 못 답할 때만 쓰는 최소 문구. 정상 경로의 모든 문구는 서버가 준다.
-  var OFFLINE = {
-    ok: false,
-    titleKo: '연결이 잠시 끊겼어요', titleEn: 'Connection problem',
-    bodyKo: '인터넷 연결을 확인하신 뒤 이 페이지를 새로고침해 주세요.',
-    bodyEn: 'Please check your connection and refresh this page.'
-  };
+  function offline() {
+    return { ok: false, titleKo: T.ko.offTitle, titleEn: T.en.offTitle, bodyKo: T.ko.offBody, bodyEn: T.en.offBody };
+  }
 
   function draw(o, busy) {
-    var html =
-      '<h1>' + esc(o.titleKo) + '</h1>' +
-      '<p class="sub">' + esc(o.titleEn) + '</p>' +
-      '<p class="body">' + esc(o.bodyKo) + '<br/><span class="en">' + esc(o.bodyEn) + '</span></p>';
-
+    if (o.lang === 'en' || o.lang === 'ko') applyLang(o.lang);
+    var html = '<h1>' + esc(pick(o, 'title')) + '</h1>' +
+               '<p class="body">' + esc(pick(o, 'body')) + '</p>';
     if (o.confirm) {
-      html += '<button class="btn' + (o.confirm.danger ? ' danger' : '') + '" id="go"' +
-              (busy ? ' disabled' : '') + '>' +
-              (busy
-                ? '<span class="ko">처리 중입니다</span><span class="en">Working…</span>'
-                : '<span class="ko">' + esc(o.confirm.labelKo) + '</span>' +
-                  '<span class="en">' + esc(o.confirm.labelEn) + '</span>') +
-              '</button>';
+      html += '<button class="btn' + (o.confirm.danger ? ' danger' : '') + '" id="go"' + (busy ? ' disabled' : '') + '>' +
+              esc(busy ? T[lang].working : pick(o.confirm, 'label')) + '</button>';
     }
     card.innerHTML = html;
-
     var go = document.getElementById('go');
     if (go && !busy) go.addEventListener('click', function () { submit(o); });
-
-    note.innerHTML = (o.confirm ? GUARD + '<br/><br/>' : '') + FOOT;
+    note.innerHTML = (o.confirm ? esc(T[lang].guard) + '<br/><br/>' : '') + esc(T[lang].foot);
   }
 
   function submit(prev) {
@@ -155,13 +170,13 @@
     fetch(url(), { method: 'POST', headers: { 'Content-Type': 'application/json' } })
       .then(function (r) { return r.json(); })
       .then(function (o) { draw(o, false); window.scrollTo(0, 0); })
-      .catch(function () { draw(OFFLINE, false); });
+      .catch(function () { draw(offline(), false); });
   }
 
   fetch(url(), { method: 'GET' })
     .then(function (r) { return r.json(); })
     .then(function (o) { draw(o, false); })
-    .catch(function () { draw(OFFLINE, false); });
+    .catch(function () { draw(offline(), false); });
 })();
 </script>
 </body>
