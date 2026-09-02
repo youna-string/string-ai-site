@@ -101,7 +101,10 @@
 
   var q = new URLSearchParams(location.search);
   var token = q.get('token') || '';
-  var action = q.get('action') === 'revoke' ? 'revoke' : 'verify';
+  // 액션 허용 목록 — 2026-09-02: 선생님 연결 보호자 승인/거절(approve_link/decline_link) 추가. 그 밖의 값은 verify.
+  var ALLOWED_ACTIONS = ['verify', 'revoke', 'approve_link', 'decline_link'];
+  var actionParam = q.get('action') || 'verify';
+  var action = ALLOWED_ACTIONS.indexOf(actionParam) >= 0 ? actionParam : 'verify';
   var card = document.getElementById('card');
   var note = document.getElementById('note');
 
