@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex">
+<meta name="referrer" content="no-referrer">
 <title>String AI — 보호자 동의</title>
 <!--
   보호자 동의 확인 페이지 (2026-08-29 신설).
@@ -79,6 +80,11 @@
   .btn { font-size: 16px; font-weight: 600; line-height: 1.35; }
   .note { padding: 16px 4px 0; font-size: 12px; line-height: 1.6; color: var(--note); }
   .loading { font-size: 14px; line-height: 1.6; color: var(--detail); text-align: center; padding: 12px 0; }
+  label { display:block; margin:16px 0 8px; font-size:14px; line-height:1.6; }
+  select { width:100%; padding:12px; font:inherit; border:1px solid var(--detail); border-radius:8px; background:var(--card); }
+  .check { display:flex; gap:10px; align-items:flex-start; }
+  .check input { flex:none; margin-top:5px; }
+  .secondary { background:var(--body); }
 </style>
 </head>
 <body>
@@ -101,12 +107,32 @@
       guard: '이 페이지를 여는 것만으로는 아무것도 바뀌지 않아요. 버튼을 눌러야 완료돼요.',
       foot: 'String AI에서 자동으로 보낸 안내예요 · 문의: stringaiapp@gmail.com',
       offTitle: '연결이 잠시 끊겼어요', offBody: '인터넷 연결을 확인한 뒤 이 페이지를 새로고침해 주세요.'
+      , country: '자녀가 현재 거주하는 국가', choose: '선택해 주세요', kr: '대한민국', us: '미국',
+      guardian: '저는 이 자녀의 법정대리인이며, 위에 안내된 성인 확인을 요청합니다.',
+      start: 'KWS 보호자 확인 시작', refresh: '인증 결과 확인',
+      kwsPrivacy: 'KWS 개인정보 및 AgeGraph 안내',
+      pending: '인증 요청을 보냈어요. 보호자 이메일을 확인한 뒤, 여기서 인증 결과 확인을 눌러 주세요. 이전에 인증한 주소라면 바로 결과가 나올 수도 있어요.',
+      verified: '성인 확인 결과가 도착했어요. 인증 결과 확인을 눌러 공유 승인 단계로 이동해 주세요.',
+      rate_limited: '확인 요청이 많아요. 잠시 뒤 다시 시도해 주세요.',
+      unavailable: '지금은 인증 요청을 확인하지 못했어요. 메일이 도착했을 수도 있으니 먼저 확인해 주세요. 공유 승인은 완료되지 않았어요.',
+      rejected: '인증 요청을 보내지 못했어요. 잠시 뒤 다시 시도해 주세요.',
+      invalid: '입력 내용을 확인해 주세요.', expired: '요청이 만료됐어요. 자녀가 앱에서 새 연결 요청을 보내 주세요.'
     },
     en: {
       title: 'String AI — Parental consent', loading: 'Loading…', working: 'Working…',
       guard: 'Opening this page changes nothing. Pressing the button completes it.',
       foot: 'Automated message from String AI · Questions? stringaiapp@gmail.com',
       offTitle: 'Connection problem', offBody: 'Please check your connection and refresh this page.'
+      , country: "Your child's current country of residence", choose: 'Choose a country', kr: 'Republic of Korea', us: 'United States',
+      guardian: "I am this child's legal guardian and request the adult verification described above.",
+      start: 'Start KWS parent verification', refresh: 'Check verification result',
+      kwsPrivacy: 'KWS privacy and AgeGraph information',
+      pending: 'Verification was requested. Check your email, then select Check verification result here. A previously verified address may return a result right away.',
+      verified: 'Adult verification arrived. Select Check verification result to continue to sharing approval.',
+      rate_limited: 'There have been too many requests. Please try again later.',
+      unavailable: 'We could not confirm this request yet. An email may already have arrived, so check your inbox first. Sharing has not been approved.',
+      rejected: 'We could not send the verification request. Please try again later.',
+      invalid: 'Please check the information entered.', expired: 'This request expired. Ask your child to send a new connection request in the app.'
     }
   };
 
@@ -159,9 +185,46 @@
       html += '<button class="btn' + (o.confirm.danger ? ' danger' : '') + '" id="go"' + (busy ? ' disabled' : '') + '>' +
               esc(busy ? T[lang].working : pick(o.confirm, 'label')) + '</button>';
     }
+    if (o.parentVerification) {
+      html += '<p class="body"><a href="https://www.kidswebservices.com/privacy-policy" target="_blank" rel="noopener noreferrer">' + esc(T[lang].kwsPrivacy) + '</a></p>' +
+        '<label for="country">' + esc(T[lang].country) + '</label><select id="country"><option value="">' + esc(T[lang].choose) + '</option><option value="KR">' + esc(T[lang].kr) + '</option><option value="US">' + esc(T[lang].us) + '</option></select>' +
+        '<label class="check"><input type="checkbox" id="guardian"><span>' + esc(T[lang].guardian) + '</span></label>' +
+        '<button class="btn" id="start-verification" disabled>' + esc(T[lang].start) + '</button>' +
+        '<button class="btn secondary" id="refresh-verification">' + esc(T[lang].refresh) + '</button>' +
+        '<p class="body" id="verification-status" role="status" aria-live="polite"></p>';
+    }
     card.innerHTML = html;
     var go = document.getElementById('go');
     if (go && !busy) go.addEventListener('click', function () { submit(o); });
+    if (o.parentVerification) {
+      var country = document.getElementById('country');
+      var guardian = document.getElementById('guardian');
+      var start = document.getElementById('start-verification');
+      var refresh = document.getElementById('refresh-verification');
+      var status = document.getElementById('verification-status');
+      var working = false;
+      function updateStart() { start.disabled = working || !country.value || !guardian.checked; }
+      country.addEventListener('change', updateStart);
+      guardian.addEventListener('change', updateStart);
+      start.addEventListener('click', function () {
+        if (working || start.disabled) return;
+        working = true; updateStart(); refresh.disabled = true; status.textContent = T[lang].working;
+        fetch(API.replace('/verify-parent-consent', '/kws-parent-verification'), {
+          method: 'POST', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ token: token, location: country.value, guardian: guardian.checked,
+            disclosureVersion: o.parentVerification.disclosureVersion, language: lang })
+        }).then(function (r) { return r.json(); }).then(function (result) {
+          status.textContent = T[lang][result.code] || T[lang].unavailable;
+        }).catch(function () { status.textContent = T[lang].unavailable; }).finally(function () {
+          working = false; updateStart(); refresh.disabled = false;
+        });
+      });
+      refresh.addEventListener('click', function () {
+        refresh.disabled = true;
+        fetch(url(), { method: 'GET' }).then(function (r) { return r.json(); })
+          .then(function (result) { draw(result, false); }).catch(function () { draw(offline(), false); });
+      });
+    }
     note.innerHTML = (o.confirm ? esc(T[lang].guard) + '<br/><br/>' : '') + esc(T[lang].foot);
   }
 
