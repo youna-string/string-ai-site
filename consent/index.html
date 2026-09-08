@@ -108,6 +108,7 @@
       foot: 'String AI에서 자동으로 보낸 안내예요 · 문의: stringaiapp@gmail.com',
       offTitle: '연결이 잠시 끊겼어요', offBody: '인터넷 연결을 확인한 뒤 이 페이지를 새로고침해 주세요.'
       , country: '자녀가 현재 거주하는 국가', choose: '선택해 주세요', kr: '대한민국', us: '미국',
+      countryHelp: '국적이나 앱 언어가 아니라 자녀의 실제 거주 국가를 선택해 주세요. 미국에 거주하면서 한국어를 쓰는 경우에도 미국을 선택해요. 안내 언어와 인증 국가는 별개예요.',
       guardian: '저는 이 자녀의 법정대리인이며, 위에 안내된 성인 확인을 요청합니다.',
       start: 'KWS 보호자 확인 시작', refresh: '인증 결과 확인',
       kwsPrivacy: 'KWS 개인정보 및 AgeGraph 안내',
@@ -124,6 +125,7 @@
       foot: 'Automated message from String AI · Questions? stringaiapp@gmail.com',
       offTitle: 'Connection problem', offBody: 'Please check your connection and refresh this page.'
       , country: "Your child's current country of residence", choose: 'Choose a country', kr: 'Republic of Korea', us: 'United States',
+      countryHelp: "Choose where your child actually lives, regardless of nationality or app language. For a child living in the United States, select United States even if you use Korean. Language and verification country are separate.",
       guardian: "I am this child's legal guardian and request the adult verification described above.",
       start: 'Start KWS parent verification', refresh: 'Check verification result',
       kwsPrivacy: 'KWS privacy and AgeGraph information',
@@ -187,7 +189,8 @@
     }
     if (o.parentVerification) {
       html += '<p class="body"><a href="https://www.kidswebservices.com/privacy-policy" target="_blank" rel="noopener noreferrer">' + esc(T[lang].kwsPrivacy) + '</a></p>' +
-        '<label for="country">' + esc(T[lang].country) + '</label><select id="country"><option value="">' + esc(T[lang].choose) + '</option><option value="KR">' + esc(T[lang].kr) + '</option><option value="US">' + esc(T[lang].us) + '</option></select>' +
+        '<label for="country">' + esc(T[lang].country) + '</label><select id="country" aria-describedby="country-help"><option value="">' + esc(T[lang].choose) + '</option><option value="KR">' + esc(T[lang].kr) + '</option><option value="US">' + esc(T[lang].us) + '</option></select>' +
+        '<p class="body" id="country-help">' + esc(T[lang].countryHelp) + '</p>' +
         '<label class="check"><input type="checkbox" id="guardian"><span>' + esc(T[lang].guardian) + '</span></label>' +
         '<button class="btn" id="start-verification" disabled>' + esc(T[lang].start) + '</button>' +
         '<button class="btn secondary" id="refresh-verification">' + esc(T[lang].refresh) + '</button>' +
