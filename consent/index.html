@@ -36,6 +36,7 @@
     메일이 수신자 언어 하나로 가므로 이 페이지도 같은 언어 하나로 그린다. 언어 = 링크의 ?lang=(메일이 실어 옴),
     서버 JSON 의 lang(옛 링크: 학생 프로필 언어)이 있으면 그것. 둘 다 없으면 ko.
 -->
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <style>
   :root {
     --bg: #F5F1E3;
@@ -51,7 +52,7 @@
   html, body { background: var(--bg); }
   body {
     margin: 0;
-    font-family: -apple-system, 'Segoe UI', Roboto, sans-serif;
+    font-family: Pretendard, -apple-system, 'Segoe UI', Roboto, sans-serif;
     color: var(--body);
     /* 한글은 어절 단위로 끊는다 — keep-all 이 없으면 "누르셔/야" 처럼 단어 중간이 잘린다. */
     word-break: keep-all;
