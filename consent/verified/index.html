@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<meta name="referrer" content="no-referrer">
+<title>String AI — 보호자 확인</title>
+<style>
+  :root {
+    --bg: #F5F1E3;
+    --card: #FFFBF0;
+    --heading: #2E2A24;
+    --body: #5C5346;
+    --detail: #8A7F6E;
+    --note: #A89C88;
+    --gold: #D2A964;
+    --danger: #B0685C;
+  }
+  * { box-sizing: border-box; }
+  html, body { background: var(--bg); }
+  body {
+    margin: 0;
+    font-family: Pretendard, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    color: var(--body);
+    /* 한글은 어절 단위로 끊는다 — keep-all 이 없으면 "누르셔/야" 처럼 단어 중간이 잘린다. */
+    word-break: keep-all;
+    overflow-wrap: break-word;
+    -webkit-text-size-adjust: 100%;
+  }
+  .wrap { max-width: 480px; margin: 0 auto; padding: 32px 16px 40px; }
+  .mark {
+    padding: 0 4px 14px;
+    font-size: 16px; font-weight: 700; letter-spacing: .3px;
+    color: var(--heading);
+  }
+  .card { background: var(--card); border-radius: 16px; padding: 28px 24px; }
+  h1 { margin: 0 0 4px; font-size: 20px; line-height: 1.4; font-weight: 700; color: var(--heading); }
+  .sub { margin: 0 0 16px; font-size: 14px; line-height: 1.5; color: var(--detail); }
+  .body { margin: 0 0 12px; font-size: 14px; line-height: 1.6; color: var(--body); }
+  .body .en { color: var(--body); }
+  .btn {
+    display: block; width: 100%; margin: 16px 0 4px;
+    border: 0; border-radius: 12px; padding: 13px 16px;
+    background: var(--gold); color: #FFFFFF;
+    font-family: inherit; cursor: pointer; text-align: center;
+  }
+  .btn.danger { background: var(--danger); }
+  .btn:disabled { opacity: .5; cursor: default; }
+  .btn { font-size: 16px; font-weight: 600; line-height: 1.35; }
+  .note { padding: 16px 4px 0; font-size: 12px; line-height: 1.6; color: var(--note); }
+  .loading { font-size: 14px; line-height: 1.6; color: var(--detail); text-align: center; padding: 12px 0; }
+  label { display:block; margin:16px 0 8px; font-size:14px; line-height:1.6; }
+  select { width:100%; padding:12px; font:inherit; border:1px solid var(--detail); border-radius:8px; background:var(--card); }
+  .check { display:flex; gap:10px; align-items:flex-start; }
+  .check input { flex:none; margin-top:5px; }
+  .secondary { background:var(--body); }
+</style>
+
+</head>
+<body>
+  <div class="wrap">
+  <div class="card" id="card">
+    <h1 id="t">확인하는 중…</h1>
+    <p class="body" id="b">잠시만 기다려 주세요.</p>
+  </div>
+  </div>
+<script>
+(function () {
+  // KWS 성인 인증이 끝나면 이 페이지로 돌아온다(포털 Redirect URL).
+  // 결과는 URL 을 믿지 않는다 — 웹훅이 서버에 이미 기록했고, 여기서는 원래 승인 페이지로만 되돌린다.
+  // 토큰은 인증을 시작한 같은 브라우저의 localStorage 에서 읽는다(제3자·URL 노출 0).
+  var T = {
+    ko: { wait: "확인하는 중…", waitB: "잠시만 기다려 주세요.",
+          lost: "거의 다 됐어요",
+          lostB: "성인 확인은 끝났습니다. 마지막으로 연결을 승인하시려면, 받으신 ‘선생님 연결 승인’ 메일을 열어 승인 버튼을 눌러 주세요." },
+    en: { wait: "Checking…", waitB: "One moment, please.",
+          lost: "Almost there",
+          lostB: "Your adult verification is complete. To finish, open the ‘Approve a teacher connection’ email you received and press the approve button." }
+  };
+  var lang = "ko";
+  try { if (localStorage.getItem("sa_consent_lang") === "en") lang = "en"; } catch (e) {}
+  if (lang === "en") document.documentElement.lang = "en";
+  var t = null;
+  try { t = localStorage.getItem("sa_consent_token"); } catch (e) {}
+  if (t && /^[0-9a-fA-F-]{36}$/.test(t)) {
+    try { localStorage.removeItem("sa_consent_token"); } catch (e) {}
+    location.replace("/consent/?token=" + encodeURIComponent(t) + "&lang=" + lang);
+    return;
+  }
+  document.getElementById("t").textContent = T[lang].lost;
+  document.getElementById("b").textContent = T[lang].lostB;
+})();
+</script>
+</body>
+</html>

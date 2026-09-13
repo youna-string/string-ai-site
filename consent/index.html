@@ -212,6 +212,10 @@
       guardian.addEventListener('change', updateStart);
       start.addEventListener('click', function () {
         if (working || start.disabled) return;
+        // 2026-09-13: 인증이 끝나면 KWS 가 /consent/verified/ 로 돌려보낸다(포털 Redirect URL).
+        //   그 페이지는 어느 승인인지 모르므로, 같은 브라우저의 localStorage 에 토큰을 잠깐 둔다.
+        //   URL·제3자에 토큰을 싣지 않으려는 선택이다 — 실패해도 메일 링크가 그대로 유효하다.
+        try { localStorage.setItem('sa_consent_token', token); localStorage.setItem('sa_consent_lang', lang); } catch (e) {}
         working = true; updateStart(); refresh.disabled = true; status.textContent = T[lang].working;
         fetch(API.replace('/verify-parent-consent', '/kws-parent-verification'), {
           method: 'POST', headers: { 'Content-Type': 'application/json' },
