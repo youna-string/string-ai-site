@@ -1,0 +1,142 @@
+{
+  "sourceTarget": "play-phone",
+  "sources": {
+    "en/lesson": {
+      "path": "store-assets/screenshots/out/play-phone/en/01_lesson.png",
+      "sha256": "a1223f8ed3c98c1b149b68d4deb74e9eaba0616430f69c8a0dc36309bc1a90d4",
+      "width": 1080,
+      "height": 1920
+    },
+    "en/mission": {
+      "path": "store-assets/screenshots/out/play-phone/en/02_mission.png",
+      "sha256": "deabac21c8fd5c5d7dcae9cfd640d60b63bd0564ed9a181e8fd158faae08cc21",
+      "width": 1080,
+      "height": 1920
+    },
+    "en/piece": {
+      "path": "store-assets/screenshots/out/play-phone/en/03_piece.png",
+      "sha256": "82075fda7f1da93e6e9c17ae05411a59e58daf672597ebd3f14136e70fcadf36",
+      "width": 1080,
+      "height": 1920
+    },
+    "en/progress": {
+      "path": "store-assets/screenshots/out/play-phone/en/04_progress.png",
+      "sha256": "866202a02babe131da08a0913b8d97c842e87610bfef02479cc2f95053d1b2c9",
+      "width": 1080,
+      "height": 1920
+    },
+    "en/habit": {
+      "path": "store-assets/screenshots/out/play-phone/en/05_habit.png",
+      "sha256": "c3a592d53985d7ee8bc4d9a8b9e87bc95ffe775aeb57f6da6159c69bea8540e9",
+      "width": 1080,
+      "height": 1920
+    },
+    "en/library": {
+      "path": "store-assets/screenshots/out/play-phone/en/06_library.png",
+      "sha256": "6145e67f7217fca50b7b4decd0908e66f59353e738429056e26912f12a821634",
+      "width": 1080,
+      "height": 1920
+    },
+    "ko/lesson": {
+      "path": "store-assets/screenshots/out/play-phone/ko/01_lesson.png",
+      "sha256": "b9e96972651d5b4b51181bbd3a871e298c76e269cc2e87def06050d3131940ff",
+      "width": 1080,
+      "height": 1920
+    },
+    "ko/mission": {
+      "path": "store-assets/screenshots/out/play-phone/ko/02_mission.png",
+      "sha256": "17d24832c170773d549fecb809911407f36915ca66ecfe4265309d63ff935ca4",
+      "width": 1080,
+      "height": 1920
+    },
+    "ko/piece": {
+      "path": "store-assets/screenshots/out/play-phone/ko/03_piece.png",
+      "sha256": "eb56f780a49755358a990bcd5504469bdb6cac87da872117d37faab7ed83709f",
+      "width": 1080,
+      "height": 1920
+    },
+    "ko/progress": {
+      "path": "store-assets/screenshots/out/play-phone/ko/04_progress.png",
+      "sha256": "b407f20e95c8c357dee754d6844d39e53cd1656e31bdee685b8668acfb42a4ee",
+      "width": 1080,
+      "height": 1920
+    },
+    "ko/habit": {
+      "path": "store-assets/screenshots/out/play-phone/ko/05_habit.png",
+      "sha256": "c8fe50628899274e677dca1f3f7c24cf815e82aad42066bfae99a67af3672909",
+      "width": 1080,
+      "height": 1920
+    },
+    "ko/library": {
+      "path": "store-assets/screenshots/out/play-phone/ko/06_library.png",
+      "sha256": "ece3dd27f2147d68012c72dda8d7784ad7936ecd426512742a325eb45411cf20",
+      "width": 1080,
+      "height": 1920
+    }
+  },
+  "variants": {
+    "en": {
+      "lesson": {
+        "src": "assets/screenshots/lesson-en-864.e287516e437f.webp",
+        "srcset": "assets/screenshots/lesson-en-432.2f63f03eec0a.webp 432w, assets/screenshots/lesson-en-864.e287516e437f.webp 864w"
+      },
+      "mission": {
+        "src": "assets/screenshots/mission-en-864.0236e8df0e4a.webp",
+        "srcset": "assets/screenshots/mission-en-432.65d5ce7111f1.webp 432w, assets/screenshots/mission-en-864.0236e8df0e4a.webp 864w"
+      },
+      "piece": {
+        "src": "assets/screenshots/piece-en-864.bd74308fcfac.webp",
+        "srcset": "assets/screenshots/piece-en-432.7a5dec140d37.webp 432w, assets/screenshots/piece-en-864.bd74308fcfac.webp 864w"
+      },
+      "progress": {
+        "src": "assets/screenshots/progress-en-864.69f62e2ea8f7.webp",
+        "srcset": "assets/screenshots/progress-en-432.33bc6bc767fb.webp 432w, assets/screenshots/progress-en-864.69f62e2ea8f7.webp 864w"
+      },
+      "habit": {
+        "src": "assets/screenshots/habit-en-864.5c6d6e9b4f22.webp",
+        "srcset": "assets/screenshots/habit-en-432.30886812b00e.webp 432w, assets/screenshots/habit-en-864.5c6d6e9b4f22.webp 864w"
+      },
+      "library": {
+        "src": "assets/screenshots/library-en-864.764a717a3702.webp",
+        "srcset": "assets/screenshots/library-en-432.428289709ee4.webp 432w, assets/screenshots/library-en-864.764a717a3702.webp 864w"
+      }
+    },
+    "ko": {
+      "lesson": {
+        "src": "assets/screenshots/lesson-ko-864.44d5f1fb96bc.webp",
+        "srcset": "assets/screenshots/lesson-ko-432.2a2e40389d07.webp 432w, assets/screenshots/lesson-ko-864.44d5f1fb96bc.webp 864w"
+      },
+      "mission": {
+        "src": "assets/screenshots/mission-ko-864.d2709a08a8e3.webp",
+        "srcset": "assets/screenshots/mission-ko-432.a14994bf36c8.webp 432w, assets/screenshots/mission-ko-864.d2709a08a8e3.webp 864w"
+      },
+      "piece": {
+        "src": "assets/screenshots/piece-ko-864.672e87ae090e.webp",
+        "srcset": "assets/screenshots/piece-ko-432.870ce975048e.webp 432w, assets/screenshots/piece-ko-864.672e87ae090e.webp 864w"
+      },
+      "progress": {
+        "src": "assets/screenshots/progress-ko-864.68f1f431ea4e.webp",
+        "srcset": "assets/screenshots/progress-ko-432.0d0749e8d5cb.webp 432w, assets/screenshots/progress-ko-864.68f1f431ea4e.webp 864w"
+      },
+      "habit": {
+        "src": "assets/screenshots/habit-ko-864.8e3b78c1cd7b.webp",
+        "srcset": "assets/screenshots/habit-ko-432.1aa9f0a5dced.webp 432w, assets/screenshots/habit-ko-864.8e3b78c1cd7b.webp 864w"
+      },
+      "library": {
+        "src": "assets/screenshots/library-ko-864.c917ba4970ce.webp",
+        "srcset": "assets/screenshots/library-ko-432.1cf8e91716f7.webp 432w, assets/screenshots/library-ko-864.c917ba4970ce.webp 864w"
+      }
+    }
+  },
+  "icon": "assets/screenshots/icon.ecf6ef3f0778.png",
+  "outputSizes": [
+    [
+      432,
+      768
+    ],
+    [
+      864,
+      1536
+    ]
+  ]
+}
