@@ -142,7 +142,10 @@
   var q = new URLSearchParams(location.search);
   var token = q.get('token') || '';
   // 액션 허용 목록 — 2026-09-02: 선생님 연결 보호자 승인/거절(approve_link/decline_link) 추가. 그 밖의 값은 verify.
-  var ALLOWED_ACTIONS = ['verify', 'revoke', 'approve_link', 'decline_link'];
+  // 2026-10-10: AI 코칭(국외 이전)만 끄기(withdraw_cross_border — 확인 메일 링크, #132).
+  var ALLOWED_ACTIONS = ['verify', 'revoke', 'approve_link', 'decline_link', 'withdraw_cross_border'];
+  // 동의 확인의 선택 칸(서버 JSON o.choice — AI 코칭 국외 이전). 처음엔 꺼짐. 다시 그려도(처리 중) 고른 값을 지킨다.
+  var choiceChecked = false;
   var actionParam = q.get('action') || 'verify';
   var action = ALLOWED_ACTIONS.indexOf(actionParam) >= 0 ? actionParam : 'verify';
   var langParam = q.get('lang');
@@ -184,6 +187,11 @@
     if (o.lang === 'en' || o.lang === 'ko') applyLang(o.lang);
     var html = '<h1>' + esc(pick(o, 'title')) + '</h1>' +
                '<p class="body">' + esc(pick(o, 'body')) + '</p>';
+    if (o.choice && o.confirm) {
+      html += '<label class="check"><input type="checkbox" id="choice"' + (choiceChecked ? ' checked' : '') + (busy ? ' disabled' : '') + '><span>' +
+              esc(pick(o.choice, 'label')) + '</span></label>' +
+              '<p class="body">' + esc(pick(o.choice, 'detail')) + '</p>';
+    }
     if (o.confirm) {
       html += '<button class="btn' + (o.confirm.danger ? ' danger' : '') + '" id="go"' + (busy ? ' disabled' : '') + '>' +
               esc(busy ? T[lang].working : pick(o.confirm, 'label')) + '</button>';
@@ -200,6 +208,8 @@
     card.innerHTML = html;
     var go = document.getElementById('go');
     if (go && !busy) go.addEventListener('click', function () { submit(o); });
+    var choice = document.getElementById('choice');
+    if (choice && !busy) choice.addEventListener('change', function () { choiceChecked = choice.checked; });
     if (o.parentVerification) {
       var country = document.getElementById('country');
       var guardian = document.getElementById('guardian');
@@ -238,7 +248,9 @@
 
   function submit(prev) {
     draw(prev, true);
-    fetch(url(), { method: 'POST', headers: { 'Content-Type': 'application/json' } })
+    // 선택 칸을 고른 경우에만 cross_border=yes — 안 실으면 서버는 꺼짐으로 동의한다(#132).
+    var target = url() + (prev.choice && choiceChecked ? '&cross_border=yes' : '');
+    fetch(target, { method: 'POST', headers: { 'Content-Type': 'application/json' } })
       .then(function (r) { return r.json(); })
       .then(function (o) { draw(o, false); window.scrollTo(0, 0); })
       .catch(function () { draw(offline(), false); });
