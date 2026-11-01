@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>String AI</title>
-<meta name="description" content="바이올린·비올라·첼로 전용 AI 연습 코치. 음 하나하나를 듣고, 자세를 보고, 매 연주를 채점해서 무엇을 고칠지 연주가 끝나면 바로 알려 줍니다.">
+<meta name="description" content="바이올린·비올라·첼로 연습을 돕는 String AI. 연주 피드백, 비브라토·청음·이론·음악사 클래스, 내 악보와 선생님 숙제.">
 <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <link rel="icon" href="assets/screenshots/icon.ecf6ef3f0778.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -206,7 +206,7 @@
       <div class="hero-copy">
       <img class="app-icon" src="assets/screenshots/icon.ecf6ef3f0778.png" alt="String AI 앱 아이콘" width="108" height="108">
       <h1 data-i18n="heroH1"><span class="nb">바이올린·비올라·</span><wbr><span class="nb">첼로 전용</span><br><em>AI 연습 코치</em></h1>
-      <p class="sub" data-i18n="heroSub">음 하나하나를 듣고, 자세를 보고, 매 연주를 채점해서 무엇을 고칠지 연주가 끝나면 바로 알려 줍니다. 레슨과 레슨 사이의 매일 연습을 String AI가 코치해요.</p>
+      <p class="sub" data-i18n="heroSub">연습할 구간을 정하고, 연주 뒤 피드백을 확인하세요. 비브라토·청음·이론·음악사 클래스와 내 악보로 하는 연습도 함께 제공합니다.</p>
       <div class="cta-row">
         <!-- App Store 링크 (2026-08-21 실측 — itunes lookup bundleId=com.stringai.practice → id6787829281.
              지역 무관 형태라 한국/미국 어느 쪽에서 열어도 그 나라 스토어로 감. -->
@@ -225,6 +225,7 @@
         <div class="trust">
           <span data-i18n="trustAge">연령 4+</span><span data-i18n="trustCat">음악</span><span data-i18n="trustTrial">7일 무료 체험</span>
         </div>
+        <p class="plans-note"><a href="#classes" data-i18n="navClasses">클래스</a> · <a href="#my-scores" data-i18n="navMyScores">내 악보</a></p>
       </div>
       </div>
       <figure class="poster">
@@ -237,17 +238,17 @@
   <!-- 시그니처 설명 — 같은 사진을 반복하지 않는다 -->
   <section>
     <div class="wrap">
-      <p class="eyebrow" data-i18n="eb1">Signature</p>
+      <p class="eyebrow" data-i18n="eb1">연주 피드백</p>
       <h2 data-i18n="h2feat">듣고, 채점하고, 고칠 곳을 짚어요</h2>
-      <p class="lede" data-i18n="ledeFeat">좋은 레슨은 "어디를, 왜, 어떻게"를 짚어 줍니다. String AI도 연주가 끝날 때마다 그렇게 해요.</p>
+      <p class="lede" data-i18n="ledeFeat">연주를 마치면 측정한 항목의 피드백을 보고, 필요한 구간을 미션으로 다시 연습합니다.</p>
       <div class="feats">
         <article class="feat">
           <h3 data-i18n="f1h">5가지 연주 요소 채점</h3>
-          <p data-i18n="f1p">음정·박자·셈여림·음색·자세. 연주할 때마다 5가지 연주 요소로 점수를 내고, 약한 요소를 진단해 딱 맞는 미션을 처방합니다.</p>
+          <p data-i18n="f1p">음정·박자·셈여림·음색·자세를 살펴봅니다. 마이크와 카메라로 측정할 수 있는 항목에 따라 결과가 달라집니다.</p>
         </article>
         <article class="feat">
-          <h3 data-i18n="f2h">AI 코치의 말</h3>
-          <p data-i18n="f2p">어느 마디에서 무엇을 어떻게 고칠지 말로 짚어 줍니다. 선생님이 계시면 지도 메모가 연습 계획 화면에 보이고, AI 코칭을 켜면 레슨 시작 안내에도 반영돼요.</p>
+          <h3 data-i18n="f2h">연습 계획과 코칭</h3>
+          <p data-i18n="f2p">연습할 구간과 방법을 안내합니다. 선생님의 지도 메모는 연습 계획에 보이고, AI 코칭을 켜면 레슨 시작 안내에도 반영됩니다.</p>
         </article>
         <article class="feat">
           <h3 data-i18n="f3h">조율부터 함께</h3>
@@ -260,7 +261,7 @@
   <!-- 절차 -->
   <section>
     <div class="wrap">
-      <p class="eyebrow" data-i18n="eb2">How it works</p>
+      <p class="eyebrow" data-i18n="eb2">레슨 순서</p>
       <h2 data-i18n="h2how">레슨은 이렇게 흘러가요</h2>
       <div class="steps">
         <div class="step"><h3 data-i18n="s1h">조율</h3><p data-i18n="s1p">바늘을 보며 현 네 줄을 맞추면 레슨이 시작돼요.</p></div>
@@ -272,9 +273,41 @@
   </section>
 
   <!-- 앱 화면 갤러리 -->
+  <!-- Classes: text only; capture the released 1.0.4 UI before adding images. -->
+  <section id="classes">
+    <div class="wrap">
+      <p class="eyebrow" data-i18n="ebClasses">음악 클래스</p>
+      <h2 data-i18n="h2classes">비브라토·청음·이론·음악사</h2>
+      <p class="lede" data-i18n="classesIntro">설명을 보고 직접 연습하거나 확인 문제를 풀어 보세요. 청음·이론·음악사는 단원 확인에서 배운 내용을 다시 짚어요.</p>
+      <div class="feats split">
+        <div class="feat"><h3 data-i18n="classVh">비브라토</h3><p data-i18n="classVp">내 악기에 맞는 단계로 연습해요. 소리를 내는 연습에서는 음높이가 흔들리는 속도와 폭을 확인해요.</p></div>
+        <div class="feat"><h3 data-i18n="classEh">청음</h3><p data-i18n="classEp">음을 듣고 구별하고, 선율이나 리듬을 따라 해요. 확인 문제로 들은 내용을 짚어 봐요.</p></div>
+        <div class="feat"><h3 data-i18n="classTh">이론</h3><p data-i18n="classTp">음이름·쉼표·박자·음계·화음을 건반과 악보 그림으로 배워요. 수업에서 다룬 내용을 문제로 확인해요.</p></div>
+        <div class="feat"><h3 data-i18n="classHh">음악사</h3><p data-i18n="classHp">시대별 작곡가와 음악을 살펴봐요. 수업의 확인 문제를 풀고, 단원 확인에서 다시 정리해요.</p></div>
+      </div>
+      <p class="plans-note" data-i18n="classHomework">연결된 선생님이 클래스 수업을 숙제로 낼 수 있어요. 학생은 오늘의 숙제에서 수업을 열고, 선생님은 완료 여부를 확인해요.</p>
+    </div>
+  </section>
+
+  <!-- My Scores: no accuracy or unrestricted-import claims. -->
+  <section id="my-scores">
+    <div class="wrap">
+      <p class="eyebrow" data-i18n="ebMyScores">내 악보</p>
+      <h2 data-i18n="h2myScores">가져오고 고쳐서 연습하기</h2>
+      <p class="lede" data-i18n="myScoresIntro">학생 계정에서 내 악기의 인쇄된 파트 악보를 파일·사진·카메라로 가져오세요. 앱이 기기 안에서 읽은 악보로 연습할 수 있어요.</p>
+      <div class="steps">
+        <div class="step"><h3 data-i18n="myFixH">고치기</h3><p data-i18n="myFixP">앱이 잘못 읽은 음표와 기호를 원본을 보며 고쳐요.</p></div>
+        <div class="step"><h3 data-i18n="myViewH">전체 보기</h3><p data-i18n="myViewP">앱이 읽은 악보와 원본을 번갈아 보고, 고칠 마디를 눌러 돌아가요.</p></div>
+        <div class="step"><h3 data-i18n="mySplitH">곡 나누기</h3><p data-i18n="mySplitP">한 페이지에 두 곡이 있으면 둘째 곡의 시작 마디에서 나눠 따로 보관해요.</p></div>
+        <div class="step"><h3 data-i18n="myLessonH">레슨하기</h3><p data-i18n="myLessonP">들어 보고 연습할 마디를 골라 레슨을 시작해요.</p></div>
+      </div>
+      <p class="plans-note" data-i18n="myScoresPrivacy">악보·수정 내용·결과는 이 기기에만 남아요. 연결된 선생님은 연습 시간을 보고, 제목 알리기를 켜면 내가 적은 제목과 악기도 볼 수 있어요. 그 제목을 숙제로 낼 수 있지만 악보 자체는 볼 수 없어요.</p>
+    </div>
+  </section>
+
   <section>
     <div class="wrap">
-      <p class="eyebrow" data-i18n="eb6">In the app</p>
+      <p class="eyebrow" data-i18n="eb6">앱 화면</p>
       <h2 data-i18n="h2shots">화면 몇 개만 미리 볼게요</h2>
       <div class="gallery">
         <figure class="poster">
@@ -305,22 +338,23 @@
   <section>
     <div class="wrap split">
       <div>
-        <p class="eyebrow" data-i18n="eb3">For teachers</p>
-        <h2 data-i18n="h2t">선생님과 한 팀으로</h2>
+        <p class="eyebrow" data-i18n="eb3">선생님 연결</p>
+        <h2 data-i18n="h2t">숙제와 지도 메모</h2>
         <ul class="quiet-list">
-          <li data-i18n="t1"><b>초대 코드</b>로 학생과 연결하면 연습 시간·요소별 점수·약점이 한눈에 보여요.</li>
+          <li data-i18n="t1"><b>초대 코드</b>로 연결하면 학생의 연습 시간·요소별 점수·약점·숙제 진도를 볼 수 있어요.</li>
           <li data-i18n="t2">선생님의 <b>지도 메모</b>가 학생의 연습 계획 화면에 보이고, AI 코칭을 켠 학생은 레슨 시작 안내에도 반영돼요.</li>
-          <li data-i18n="t3">선생님이 악보에 남긴 <b>필기</b>가 학생 악보에 그대로 보여요.</li>
+          <li data-i18n="t4">곡뿐 아니라 <b>클래스 수업</b>도 기간을 정해 숙제로 낼 수 있어요.</li>
+          <li data-i18n="t3">선생님이 <b>라이브러리 악보</b>에 남긴 필기를 학생도 볼 수 있어요. 내 악보 원본과 수정본은 선생님에게 보내지 않아요.</li>
         </ul>
       </div>
       <div>
-        <p class="eyebrow" data-i18n="eb4">For parents</p>
-        <h2 data-i18n="h2p">안심하고 맡기실 수 있어요</h2>
+        <p class="eyebrow" data-i18n="eb4">보호자 안내</p>
+        <h2 data-i18n="h2p">연습 데이터와 보호자 동의</h2>
         <ul class="quiet-list">
-          <li data-i18n="p1">연주 <b>음성·영상은 서버에 업로드하지 않아요</b>. 레슨 임시 파일은 사용 후 정리하고, 연습실에서 저장한 영상은 기기에 남아 직접 삭제할 수 있어요.</li>
+          <li data-i18n="p1">연주 <b>음성·영상은 서버에 올리지 않아요</b>. 레슨 다시보기는 임시 보관하고, 연습실 녹화는 기기에 저장해 앱에서 삭제할 수 있어요. '영상 저장'을 누르면 사진첩에 사본이 생기며 사진 앱 설정을 따라요.</li>
           <li data-i18n="p2">만 14세 미만의 연습 데이터는 <b>부모 동의</b> 후에만 수집돼요.</li>
           <li data-i18n="p3"><b>레슨 시간</b>은 플랜의 하루·한 달 한도 안에서 쓰여요(연습실·클래스 시간은 한도에 들지 않아요).</li>
-          <li data-i18n="p4">형제는 <b>가족 공유</b>로 자녀별 계정을 만들어 각자 구독 — 결제는 부모님 카드 하나로.</li>
+          <li data-i18n="p4">14세 미만 학생이 선생님과 연습 기록을 나누려면 <b>보호자의 별도 승인</b>이 필요해요.</li>
         </ul>
       </div>
     </div>
@@ -329,9 +363,9 @@
   <!-- 가격 -->
   <section>
     <div class="wrap">
-      <p class="eyebrow" data-i18n="eb5">Plans</p>
-      <h2 data-i18n="h2plan">하루 연습 시간만 고르세요</h2>
-      <p class="lede" data-i18n="ledePlan">코칭은 모든 플랜이 같아요. 다른 건 하루 연습 시간뿐.</p>
+      <p class="eyebrow" data-i18n="eb5">플랜</p>
+      <h2 data-i18n="h2plan">레슨 시간에 맞춰 고르세요</h2>
+      <p class="lede" data-i18n="ledePlan">모든 플랜의 기능은 같고, 하루 기준량과 월 총량이 달라요.</p>
       <div class="plans">
         <div class="plan">
           <h3>Basic</h3>
@@ -352,7 +386,7 @@
           <p class="desc" data-i18n="dStd">매일 길게 연습하는 페이스.</p>
         </div>
       </div>
-      <p class="plans-note" data-i18n="planNote">7일 무료 체험(Basic 과 같은 연습 시간)으로 시작하세요. 바쁜 날 못 한 시간은 같은 달 안에서 몰아 쓸 수 있어요(하루 연습 시간의 3배까지). 가격은 스토어에서 확인하세요.</p>
+      <p class="plans-note" data-i18n="planNote">7일 무료 체험은 Basic과 같은 레슨 시간으로 시작해요. 월 총량 안에서 하루 기준량의 3배까지 쓸 수 있고, 남은 시간은 월 한도가 초기화될 때 사라져요. 연습실과 클래스 시간은 레슨 한도에서 빠지지 않아요. 가격과 자동 갱신 조건은 구입할 스토어에서 확인하세요.</p>
     </div>
   </section>
 
@@ -366,12 +400,12 @@
         <p data-i18n="a1">바이올린, 비올라, 첼로를 지원해요. 악기별 악보 라이브러리(스케일·에튀드·곡)가 준비되어 있고 계속 늘어나요.</p>
       </details>
       <details>
-        <summary data-i18n="q2">형제가 같이 쓸 수 있나요?</summary>
-        <p data-i18n="a2">네. 애플 정책상 구독은 Apple ID 하나에 1개라, 가족 공유에서 자녀별 Apple ID를 만들어 각자 구독하면 돼요. 결제는 전부 부모님 카드로 청구되고, 매번 부모 승인(구입 요청)을 거치게 할 수 있어요.</p>
+        <summary data-i18n="q2">클래스도 레슨 시간을 쓰나요?</summary>
+        <p data-i18n="a2">아니요. 비브라토·청음·이론·음악사 클래스와 연습실 시간은 플랜의 레슨 한도에서 빠지지 않아요. 내 악보로 받는 레슨은 레슨 시간을 써요.</p>
       </details>
       <details>
         <summary data-i18n="q3">아이 연주 녹음이 저장되나요?</summary>
-        <p data-i18n="a3">연주 음성·영상은 서버에 업로드하지 않아요. 레슨 임시 파일은 사용 후 정리하고, 연습실에서 저장한 영상은 기기에 남아 직접 삭제할 수 있어요. 만 14세 미만의 연습 데이터는 부모 동의 후에만 수집해요.</p>
+        <p data-i18n="a3">연주 음성·영상은 서버에 올리지 않아요. 레슨 다시보기는 임시 보관하고, 연습실 녹화는 기기에 저장해 앱에서 삭제할 수 있어요. '영상 저장'을 누르면 사진첩에도 사본이 생기며 사진 앱 설정을 따라요.</p>
       </details>
     </div>
   </section>
@@ -396,16 +430,42 @@
   // KO/EN text and screenshot selection share applyLang().
   const I18N = {
     en: {
+      navClasses: 'Classes', navMyScores: 'My Scores',
+      ebClasses: "Music classes",
+      h2classes: "Vibrato, ear training, theory & music history",
+      classesIntro: "Read explanations, practice, and answer questions. Ear training, theory and music history also include unit checks to revisit what you learned.",
+      classVh: "Vibrato",
+      classVp: "Follow steps for your instrument. In playing exercises, check the speed and width of your pitch movement.",
+      classEh: "Ear training",
+      classEp: "Listen and identify sounds, then echo melodies or rhythms. Use questions to check what you heard.",
+      classTh: "Theory",
+      classTp: "Learn note names, rests, meter, scales and chords with keyboard and staff diagrams. Answer questions on the lesson material.",
+      classHh: "Music history",
+      classHp: "Explore composers and music by period. Answer lesson questions and revisit the material in unit checks.",
+      classHomework: "Connected teachers can assign class lessons as homework. Students open them from today’s homework, and teachers can check completion.",
+      ebMyScores: "My Scores",
+      h2myScores: "Import, edit and practice",
+      myScoresIntro: "On a student account, bring in a printed part for your instrument from Files, Photos or the camera. The app reads the music on your device for you to practice.",
+      myFixH: "Edit",
+      myFixP: "Compare with the original and fix notes or markings the app misread.",
+      myViewH: "Full score",
+      myViewP: "Switch between the app’s reading and the original. Tap a measure to return to editing it.",
+      mySplitH: "Split pieces",
+      mySplitP: "If a page has two pieces, split at the second piece’s first measure to keep them separately.",
+      myLessonH: "Practice",
+      myLessonP: "Listen back, choose measures and start a lesson.",
+      myScoresPrivacy: "Your music, edits and results stay on this device. A connected teacher sees practice time and, with title sharing enabled, the title you enter and its instrument. They can assign that title as homework, but cannot see the music.",
+      t4: "Assign <b>class lessons</b> as well as pieces, with a start date and duration.",
       heroH1: 'The AI practice coach<br>for <em>violin, viola & cello</em>',
-      heroSub: 'It listens note by note, watches your form, scores every attempt, and tells you what to fix as soon as you finish. String AI coaches the daily practice between lessons.',
+      heroSub: "Choose a passage, play, and review feedback after the take. Explore vibrato, ear training, theory and music history classes, or practice from your own printed part.",
       ctaStore: 'Download on the App Store',
       ctaPlay: 'Download on Google Play',
       trustAge: 'Ages 4+', trustCat: 'Music', trustTrial: '7-day free trial',
       shotCap: 'String AI picks the measures to work on and listens as you play.',
       eb1: 'Signature', h2feat: 'It listens, scores, and points out what to fix',
-      ledeFeat: 'A good lesson points out where, why, and how. String AI does the same after every take.',
-      f1h: 'Five playing elements', f1p: 'Pitch, rhythm, dynamics, tone, posture. Every attempt is scored on these elements, and weak elements get missions aimed right at them.',
-      f2h: 'A coach that talks', f2p: 'It tells you which measures to fix and how. If you have a teacher, their notes appear on your practice plan, and with AI coaching on, the lesson-start guidance uses them too.',
+      ledeFeat: "Review feedback on the measured parts of your playing, then practice selected passages in follow-up missions.",
+      f1h: "5-axis feedback", f1p: "Pitch, rhythm, dynamics, tone and posture. Results depend on what the microphone and camera can measure.",
+      f2h: "Practice plans and coaching", f2p: "Get guidance on what to practice and how. Teacher notes appear on your practice plan; with AI coaching on, lesson-start guidance also uses them.",
       f3h: 'Tuning built in', f3p: 'Every lesson starts by tuning all four strings with the needle — and during missions a tiny tuner shows the note you’re playing.',
       eb2: 'How it works', h2how: 'How a lesson flows',
       s1h: 'Tune', s1p: 'Tune all four strings with the needle and the lesson begins.',
@@ -414,30 +474,30 @@
       s4h: 'Report', s4p: 'Scores build up day by day, and your practice shows in the calendar, certificates, and badges.',
       eb6: 'In the app', h2shots: 'A quick look inside',
       gMission: 'Work on the weak spots in short, focused missions.',
-      gProgress: 'See all five playing elements together.',
+      gProgress: "Review your 5-axis scores together.",
       g1: 'Every piece comes with its score, a reference recording, and a plan.',
       g2: 'Practice days fill the calendar. Twenty gold days in a month earns a certificate.',
       g3: 'Scales, etudes, and pieces — a growing library per instrument.',
-      eb3: 'For teachers', h2t: 'One team with your teacher',
-      t1: '<b>Invite codes</b> connect students — practice time, element-by-element scores, and weak points at a glance.',
+      eb3: 'For teachers', h2t: "Homework and teaching notes",
+      t1: "Connect through an <b>invite code</b> to view practice time, 5-axis scores, weak points and homework progress.",
       t2: 'A teacher’s <b>note</b> appears on the student’s practice plan, and for students with AI coaching on, the lesson-start guidance uses it too.',
-      t3: 'Teachers <b>mark up the score</b>, and students see it right on their copy.',
-      eb4: 'For parents', h2p: 'Built for peace of mind',
-      p1: 'Your performance <b>audio and video are not uploaded to our servers</b>. Temporary lesson files are cleaned up after use. Practice Room videos you save stay on your device until you delete them.',
+      t3: "Teachers can <b>mark library scores</b> for students to see. My Scores originals and edits are not sent to teachers.",
+      eb4: 'For parents', h2p: "Practice data and parental consent",
+      p1: "Performance <b>audio and video are not uploaded to our servers</b>. Lesson replays are temporary. Practice Room recordings stay on the device and can be deleted in the app. Save video puts a copy in Photos, where your photo app settings apply.",
       p2: 'Practice data from students under 14 is collected <b>only after parental consent</b>.',
       p3: '<b>Lesson time</b> stays within your plan’s daily and monthly limits (Practice Room and class time don’t count toward them).',
-      p4: 'Siblings subscribe separately with <b>Family Sharing</b> — one parent card pays for all.',
-      eb5: 'Plans', h2plan: 'Just pick a daily pace',
-      ledePlan: 'Coaching is identical on every plan. The only difference is daily practice time.',
+      p4: "Students under 14 need <b>separate parental approval</b> to share practice records with a teacher.",
+      eb5: 'Plans', h2plan: "Choose your lesson time",
+      ledePlan: "All plans offer the same features. The daily baseline and monthly total differ.",
       perDay: 'min/day', perDay2: 'min/day', perDay3: 'min/day',
       m450: '450 min / month', m900: '900 min / month', m1350: '1,350 min / month',
       dBasic: 'For students just starting out.', dCasual: 'A steady hobby pace.',
       dStd: 'A longer daily practice pace.',
-      planNote: 'Start with a 7-day free trial (same practice limits as Basic). Minutes you miss on busy days can be used later in the same month (up to 3× your daily practice time). See the store for pricing.',
+      planNote: "Start with a 7-day free trial with Basic lesson-time limits. Within the monthly total, use up to three times your daily baseline on a day. Unused minutes expire at the monthly reset. Practice Room and class time do not count toward lesson limits. Check pricing and renewal terms in the store you use.",
       h2faq: 'Frequently asked',
       q1: 'Which instruments are supported?', a1: 'Violin, viola, and cello — each with its own library of scales, etudes, and pieces, growing steadily.',
-      q2: 'Can siblings share?', a2: 'Yes. Apple allows one subscription per Apple ID, so create a child Apple ID for each sibling via Family Sharing and subscribe separately. All charges go to the parent’s card, with Ask to Buy approval if you like.',
-      q3: 'Are my child’s recordings stored?', a3: 'Your performance audio and video are not uploaded to our servers. Temporary lesson files are cleaned up after use. Practice Room videos you save stay on your device until you delete them. Practice data from students under 14 is collected only after parental consent.',
+      q2: "Do classes use lesson time?", a2: "No. Vibrato, ear training, theory and music history classes, and the Practice Room, do not count toward lesson limits. Lessons using My Scores do use lesson time.",
+      q3: 'Are my child’s recordings stored?', a3: "Performance audio and video are not uploaded to our servers. Lesson replays are temporary. Practice Room recordings stay on the device and can be deleted in the app. Save video also puts a copy in Photos, where your photo app settings apply.",
       ftTerms: 'Terms of Use', ftPrivacy: 'Privacy Policy', ftContact: 'Contact',
       altLesson: 'AI coaching lesson — a violin practice photo and the measures to work on',
       altMission: 'Targeted missions — today’s measure ranges and practice plan',
@@ -456,6 +516,7 @@
   function applyLang(lang) {
     if (!I18N[lang]) return;
     document.documentElement.lang = lang;
+    document.querySelector('meta[name="description"]').content = I18N[lang].heroSub;
     document.querySelectorAll('[data-panel]').forEach((el) => {
       const shot = STORE_IMAGES[lang][el.dataset.panel];
       el.srcset = shot.srcset;

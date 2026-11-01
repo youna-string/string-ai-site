@@ -24,3 +24,11 @@ The script also owns the marked image map and six static image URLs in `index.ht
 - The lesson uses the approved student photo and actual iPhone Done pixels. The composition recipe and original source hashes live in the app repository; no replacement app controls were invented. All 12 canonical PNG hashes are recorded in the website manifest.
 - The approved Korean and English privacy copy distinguishes temporary lesson media from Practice Room videos the user saves on-device. No performance audio or video is uploaded by this image update.
 - Publishing follows this repository's existing GitHub Pages main-branch deployment. This does not submit app builds, store screenshots, or OTA updates.
+
+## 1.0.4 copy preparation — 2026-10-31
+
+The landing source now describes four classes, lesson questions and unit checks, teacher-assigned class homework, and My Scores import/edit/full-score/split-piece flows. Korean uses 5가지 연주 요소; English retains axis. The app repository mirror is `../string-ai-app/docs/site/index.html`.
+
+This is a local preparation commit, not a publication. Class homework and the latest My Scores flows must be available in the released app before publishing these claims. Run the app repository’s `legal:review-gate -- --strict` before a website push. Store text uploads belong to the submission session.
+
+Existing screenshots and their manifests are unchanged. Capture actual 1.0.4 screens only after that version is ready; the shot list and code evidence are in `../string-ai-app/docs/STORE_WEBSITE_REFRESH_1.0.4.md`. Do not run the image sync script during this copy-only update.
