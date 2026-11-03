@@ -17,7 +17,7 @@ from pathlib import Path
 from PIL import Image
 
 ROOT = Path(__file__).resolve().parents[1]
-PANELS = ("lesson", "mission", "piece", "progress", "habit", "library")
+PANELS = ("lesson", "piece", "progress", "habit", "library", "myscores", "classes", "teacher")
 WIDTHS = (432, 864)
 
 
@@ -92,8 +92,8 @@ def main() -> None:
         return tag[:-1] + f' src="{shot["src"]}" srcset="{shot["srcset"]}">'
 
     html, count = re.subn(r'<img\b[^>]*data-panel="[^"]+"[^>]*>', replace_img, html)
-    if count != 6:
-        raise ValueError(f"Expected six unique screenshot elements, found {count}")
+    if count != len(PANELS):
+        raise ValueError(f"Expected {len(PANELS)} unique screenshot elements, found {count}")
     html, count = re.subn(
         r'/\* STORE_IMAGES_START \*/.*?/\* STORE_IMAGES_END \*/',
         '/* STORE_IMAGES_START */\n  const STORE_IMAGES = ' +
@@ -112,7 +112,7 @@ def main() -> None:
     for old in output.iterdir():
         if old.suffix in (".webp", ".png") and old not in keep:
             old.unlink()
-    print(f"Generated 24 WebP derivatives + shared icon; 12 source hashes recorded. HTML {len(html.encode()):,} bytes.")
+    print(f"Generated {len(PANELS) * 2 * len(WIDTHS)} WebP derivatives + shared icon; {len(PANELS) * 2} source hashes recorded. HTML {len(html.encode()):,} bytes.")
 
 
 if __name__ == "__main__":

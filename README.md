@@ -31,4 +31,4 @@ The landing source now describes four classes, lesson questions and unit checks,
 
 This is a local preparation commit, not a publication. Class homework and the latest My Scores flows must be available in the released app before publishing these claims. Run the app repository’s `legal:review-gate -- --strict` before a website push. Store text uploads belong to the submission session.
 
-Existing screenshots and their manifests are unchanged. Capture actual 1.0.4 screens only after that version is ready; the shot list and code evidence are in `../string-ai-app/docs/STORE_WEBSITE_REFRESH_1.0.4.md`. Do not run the image sync script during this copy-only update.
+Screenshots now come from the 1.0.4 store set (`store-assets/screenshots/out/play-phone`, eight panels: the mission panel is gone because its buttons no longer exist, My Scores, Classes and Teacher are new). Run `python3 scripts/sync-store-images.py --app-dir ../string-ai-app` after the store set changes. The lesson panel is still the older composite with the small AI-image note; its Korean version shows an English lesson screen until a real device capture replaces it.
