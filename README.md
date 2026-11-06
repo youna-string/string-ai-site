@@ -32,3 +32,10 @@ The landing source now describes four classes, lesson questions and unit checks,
 This is a local preparation commit, not a publication. Class homework and the latest My Scores flows must be available in the released app before publishing these claims. Run the app repository’s `legal:review-gate -- --strict` before a website push. Store text uploads belong to the submission session.
 
 Screenshots now come from the 1.0.4 store set (`store-assets/screenshots/out/play-phone`, eight panels: the mission panel is gone because its buttons no longer exist, My Scores, Classes and Teacher are new). Run `python3 scripts/sync-store-images.py --app-dir ../string-ai-app` after the store set changes. The lesson panel is still the older composite with the small AI-image note; its Korean version shows an English lesson screen until a real device capture replaces it.
+
+## 1.0.4 video section — 2026-11-06
+
+`#watch` shows two of our films, the 27-second ad and the walkthrough of about 3 minutes, per language. They are files on this site (`videos/ad-{short,explain}-{en,ko}.mp4`, 720p, index at the front), so no third-party request or cookie comes with them. Only the poster (`assets/videos/*.webp`) loads with the page; the film loads on tap. Sources: `../string-ai-video/out/ad-{b,c}-{en,ko}.mp4`. The student guide videos on this branch are the new wide film (`out/guide-student-*`), at the same addresses the app uses.
+
+This branch stays unpublished until the owner says to open: its photos and copy describe 1.0.4.
+

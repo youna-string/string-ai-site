@@ -148,6 +148,24 @@
   h2 { font-size: clamp(var(--fs-2xl), 3.4vw, var(--fs-3xl)); font-weight: 900; letter-spacing: -0.015em; line-height: 1.3; text-wrap: balance; margin-bottom: 14px; }
   .lede { color: var(--muted); max-width: 40em; }
 
+  /* ── 영상: 눌러야 받는다(이 사이트에 직접 둔 파일, 추적·쿠키 없음). 글은 왼쪽, 세로 영상 둘은 오른쪽에 살짝 어긋나게. ── */
+  .watch { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 580px); gap: 48px; align-items: center; }
+  .watch .plans-note { max-width: 34em; }
+  .videos { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: start; }
+  .vid:nth-child(2) { margin-top: 44px; }
+  .vid-frame { position: relative; aspect-ratio: 9 / 16; border-radius: var(--r-xl); overflow: hidden; background: var(--surface); border: 1px solid var(--line); box-shadow: 0 14px 34px rgba(44, 44, 44, 0.14); }
+  .vid-frame a, .vid-frame img, .vid-frame video { display: block; width: 100%; height: 100%; }
+  .vid-frame img, .vid-frame video { object-fit: cover; }
+  .vid-frame a { position: relative; }
+  .vid-icon { position: absolute; left: 50%; top: 50%; width: 68px; height: 68px; margin: -34px 0 0 -34px; border-radius: var(--r-full); background: var(--ink); box-shadow: 0 8px 22px rgba(44, 44, 44, 0.28); transition: transform 0.15s ease; }
+  .vid-icon::after { content: ''; position: absolute; left: 27px; top: 21px; border-style: solid; border-width: 13px 0 13px 21px; border-color: transparent transparent transparent var(--gold-light); }
+  .vid-frame a:hover .vid-icon { transform: scale(1.06); }
+  .vid figcaption { margin-top: 14px; }
+  .vid figcaption b { display: block; font-size: var(--fs-base); }
+  .vid figcaption span { color: var(--muted); font-size: var(--fs-sm); }
+  @media (max-width: 800px) { .watch { grid-template-columns: minmax(0, 1fr); gap: 32px; } }
+  @media (max-width: 520px) { .videos { grid-template-columns: minmax(0, 320px); justify-content: center; } .vid:nth-child(2) { margin-top: 8px; } }
+
   /* ── 시그니처 3종: 설명(이미지는 여섯 패널에 한 번씩) ── */
   .feats { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 18px; margin-top: 36px; }
   .feat { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px 18px 24px; }
@@ -240,9 +258,31 @@
       </div>
       </div>
       <figure class="poster">
-        <img data-panel="lesson" data-i18n-alt="altLesson" alt="AI 코칭 레슨 — 바이올린 연주 사진과 연습할 마디 악보" width="864" height="1536" fetchpriority="high" decoding="async" sizes="(max-width: 800px) min(400px, calc(100vw - 44px)), 360px" src="assets/screenshots/lesson-ko-864.1afe85dd321e.webp" srcset="assets/screenshots/lesson-ko-432.0fb453df35a6.webp 432w, assets/screenshots/lesson-ko-864.1afe85dd321e.webp 864w">
+        <img data-panel="lesson" data-i18n-alt="altLesson" alt="레슨 화면 — 연주를 들은 뒤 악보에 연습할 부분이 표시된 모습" width="864" height="1536" fetchpriority="high" decoding="async" sizes="(max-width: 800px) min(400px, calc(100vw - 44px)), 360px" src="assets/screenshots/lesson-ko-864.31b2b170dbf5.webp" srcset="assets/screenshots/lesson-ko-432.66071964e710.webp 432w, assets/screenshots/lesson-ko-864.31b2b170dbf5.webp 864w">
         <figcaption data-i18n="shotCap">String AI가 연습할 마디를 짚고, 연주를 듣고 있어요.</figcaption>
       </figure>
+    </div>
+  </section>
+
+  <!-- 영상: 있는 영상 중 둘만(짧은 소개, 전체 설명). 첫 화면 무게를 늘리지 않게 그림만 받고, 누르면 영상을 받는다. -->
+  <section id="watch">
+    <div class="wrap watch">
+      <div>
+        <p class="eyebrow" data-i18n="ebWatch">영상으로 보기</p>
+        <h2 data-i18n="h2watch">레슨이 어떻게 흘러가는지 보세요</h2>
+        <p class="lede" data-i18n="ledeWatch">짧게 훑어봐도 좋고, 처음부터 끝까지 천천히 봐도 좋아요.</p>
+        <p class="plans-note" data-i18n="noteWatch">전체 설명의 목소리는 AI가 만든 음성이에요. 영상 속 점수는 예시예요.</p>
+      </div>
+      <div class="videos">
+        <figure class="vid">
+          <div class="vid-frame" data-video="short"></div>
+          <figcaption><b data-i18n="vidShort">짧은 소개</b><span data-i18n="vidShortLen">27초</span></figcaption>
+        </figure>
+        <figure class="vid">
+          <div class="vid-frame" data-video="explain"></div>
+          <figcaption><b data-i18n="vidExplain">전체 설명</b><span data-i18n="vidExplainLen">약 3분</span></figcaption>
+        </figure>
+      </div>
     </div>
   </section>
 
@@ -250,7 +290,7 @@
   <section>
     <div class="wrap">
       <p class="eyebrow" data-i18n="eb1">연주 피드백</p>
-      <h2 data-i18n="h2feat">연주를 듣고 고칠 곳을 알려 줘요</h2>
+      <h2 data-i18n="h2feat">연주를 듣고 연습할 부분을 알려 줘요</h2>
       <p class="lede" data-i18n="ledeFeat">연주를 마치면 측정한 항목의 피드백을 보고, 필요한 구간을 미션으로 다시 연습합니다.</p>
       <div class="feats">
         <article class="feat">
@@ -322,31 +362,31 @@
       <h2 data-i18n="h2shots">화면 몇 개만 미리 볼게요</h2>
       <div class="gallery">
         <figure class="poster">
-          <img data-panel="piece" data-i18n-alt="altPiece" alt="곡 상세 — Cello Suite No. 1, Prelude의 악보 미리보기와 레슨 시작 버튼" width="864" height="1536" loading="lazy" decoding="async" sizes="(max-width: 520px) min(400px, calc(100vw - 44px)), (max-width: 800px) calc((100vw - 68px) / 2), 310px" src="assets/screenshots/piece-ko-864.3f3448689917.webp" srcset="assets/screenshots/piece-ko-432.2fe84acc845f.webp 432w, assets/screenshots/piece-ko-864.3f3448689917.webp 864w">
+          <img data-panel="piece" data-i18n-alt="altPiece" alt="곡 상세 — Cello Suite No. 1, Prelude의 악보 미리보기와 레슨 시작 버튼" width="864" height="1536" loading="lazy" decoding="async" sizes="(max-width: 520px) min(400px, calc(100vw - 44px)), (max-width: 800px) calc((100vw - 68px) / 2), 310px" src="assets/screenshots/piece-ko-864.56149db553d2.webp" srcset="assets/screenshots/piece-ko-432.5150522373d7.webp 432w, assets/screenshots/piece-ko-864.56149db553d2.webp 864w">
           <figcaption data-i18n="g1">곡마다 악보·참고 연주·연습 계획이 함께 있어요.</figcaption>
         </figure>
         <figure class="poster">
-          <img data-panel="progress" data-i18n-alt="altProgress" alt="연습 진도 — 음정·박자·셈여림·음색·자세 점수 오각형" width="864" height="1536" loading="lazy" decoding="async" sizes="(max-width: 520px) min(400px, calc(100vw - 44px)), (max-width: 800px) calc((100vw - 68px) / 2), 310px" src="assets/screenshots/progress-ko-864.64be8cfb9db8.webp" srcset="assets/screenshots/progress-ko-432.3e332297cbd7.webp 432w, assets/screenshots/progress-ko-864.64be8cfb9db8.webp 864w">
+          <img data-panel="progress" data-i18n-alt="altProgress" alt="연습 진도 — 음정·박자·셈여림·음색·자세 점수 오각형" width="864" height="1536" loading="lazy" decoding="async" sizes="(max-width: 520px) min(400px, calc(100vw - 44px)), (max-width: 800px) calc((100vw - 68px) / 2), 310px" src="assets/screenshots/progress-ko-864.2bee987d4ae8.webp" srcset="assets/screenshots/progress-ko-432.8a46dca844d6.webp 432w, assets/screenshots/progress-ko-864.2bee987d4ae8.webp 864w">
           <figcaption data-i18n="gProgress">5가지 연주 요소를 함께 보고 변화를 확인해요.</figcaption>
         </figure>
         <figure class="poster">
-          <img data-panel="habit" data-i18n-alt="altHome" alt="홈 화면 — 목표를 달성한 날이 별로 표시된 10월 달력" width="864" height="1536" loading="lazy" decoding="async" sizes="(max-width: 520px) min(400px, calc(100vw - 44px)), (max-width: 800px) calc((100vw - 68px) / 2), 310px" src="assets/screenshots/habit-ko-864.4ab2520c6366.webp" srcset="assets/screenshots/habit-ko-432.50a656b94eca.webp 432w, assets/screenshots/habit-ko-864.4ab2520c6366.webp 864w">
+          <img data-panel="habit" data-i18n-alt="altHome" alt="홈 화면 — 목표를 달성한 날이 별로 표시된 10월 달력" width="864" height="1536" loading="lazy" decoding="async" sizes="(max-width: 520px) min(400px, calc(100vw - 44px)), (max-width: 800px) calc((100vw - 68px) / 2), 310px" src="assets/screenshots/habit-ko-864.834d691290ff.webp" srcset="assets/screenshots/habit-ko-432.17fd57b0f085.webp 432w, assets/screenshots/habit-ko-864.834d691290ff.webp 864w">
           <figcaption data-i18n="g2">연습한 날이 달력에 쌓여요. 한 달에 골드 20일을 채우면 인증서를 받아요.</figcaption>
         </figure>
         <figure class="poster">
-          <img data-panel="library" data-i18n-alt="altLibrary" alt="라이브러리 — 악기별 모음곡·연습곡·협주곡 목록" width="864" height="1536" loading="lazy" decoding="async" sizes="(max-width: 520px) min(400px, calc(100vw - 44px)), (max-width: 800px) calc((100vw - 68px) / 2), 310px" src="assets/screenshots/library-ko-864.8a55eb87b801.webp" srcset="assets/screenshots/library-ko-432.652216bd10f3.webp 432w, assets/screenshots/library-ko-864.8a55eb87b801.webp 864w">
+          <img data-panel="library" data-i18n-alt="altLibrary" alt="라이브러리 — 악기별 모음곡·연습곡·협주곡 목록" width="864" height="1536" loading="lazy" decoding="async" sizes="(max-width: 520px) min(400px, calc(100vw - 44px)), (max-width: 800px) calc((100vw - 68px) / 2), 310px" src="assets/screenshots/library-ko-864.803776b22a3e.webp" srcset="assets/screenshots/library-ko-432.390d0af10876.webp 432w, assets/screenshots/library-ko-864.803776b22a3e.webp 864w">
           <figcaption data-i18n="g3">악기마다 스케일, 에튀드, 곡이 있고 계속 늘어나요.</figcaption>
         </figure>
         <figure class="poster">
-          <img data-panel="myscores" data-i18n-alt="altMyScores" alt="내 악보 — 앱이 읽은 Etude in D 악보 전체 보기" width="864" height="1536" loading="lazy" decoding="async" sizes="(max-width: 520px) min(400px, calc(100vw - 44px)), (max-width: 800px) calc((100vw - 68px) / 2), 310px" src="assets/screenshots/myscores-ko-864.a2bff688cf51.webp" srcset="assets/screenshots/myscores-ko-432.17927c3d9631.webp 432w, assets/screenshots/myscores-ko-864.a2bff688cf51.webp 864w">
+          <img data-panel="myscores" data-i18n-alt="altMyScores" alt="내 악보 — 앱이 읽은 Etude in D 악보 전체 보기" width="864" height="1536" loading="lazy" decoding="async" sizes="(max-width: 520px) min(400px, calc(100vw - 44px)), (max-width: 800px) calc((100vw - 68px) / 2), 310px" src="assets/screenshots/myscores-ko-864.d76bfb9eac5c.webp" srcset="assets/screenshots/myscores-ko-432.e9ef29f51a72.webp 432w, assets/screenshots/myscores-ko-864.d76bfb9eac5c.webp 864w">
           <figcaption data-i18n="gMyScores">인쇄된 악보를 사진이나 PDF로 가져와 연습해요.</figcaption>
         </figure>
         <figure class="poster">
-          <img data-panel="classes" data-i18n-alt="altClasses" alt="클래스 — 레슨 시작 버튼과 청음·이론·음악사 클래스 목록" width="864" height="1536" loading="lazy" decoding="async" sizes="(max-width: 520px) min(400px, calc(100vw - 44px)), (max-width: 800px) calc((100vw - 68px) / 2), 310px" src="assets/screenshots/classes-ko-864.2f2994c798f9.webp" srcset="assets/screenshots/classes-ko-432.6f42e7eca176.webp 432w, assets/screenshots/classes-ko-864.2f2994c798f9.webp 864w">
+          <img data-panel="classes" data-i18n-alt="altClasses" alt="클래스 — 레슨 시작 버튼과 청음·이론·음악사 클래스 목록" width="864" height="1536" loading="lazy" decoding="async" sizes="(max-width: 520px) min(400px, calc(100vw - 44px)), (max-width: 800px) calc((100vw - 68px) / 2), 310px" src="assets/screenshots/classes-ko-864.ed55f4aa9bf5.webp" srcset="assets/screenshots/classes-ko-432.d1a5afc05732.webp 432w, assets/screenshots/classes-ko-864.ed55f4aa9bf5.webp 864w">
           <figcaption data-i18n="gClasses">청음·이론·음악사·비브라토를 클래스로 배워요.</figcaption>
         </figure>
         <figure class="poster">
-          <img data-panel="teacher" data-i18n-alt="altTeacher" alt="선생님 화면 — 제자의 연습 기록과 달력" width="864" height="1536" loading="lazy" decoding="async" sizes="(max-width: 520px) min(400px, calc(100vw - 44px)), (max-width: 800px) calc((100vw - 68px) / 2), 310px" src="assets/screenshots/teacher-ko-864.8f854497adca.webp" srcset="assets/screenshots/teacher-ko-432.9e3262a7abf7.webp 432w, assets/screenshots/teacher-ko-864.8f854497adca.webp 864w">
+          <img data-panel="teacher" data-i18n-alt="altTeacher" alt="선생님 화면 — 제자의 연습 기록과 달력" width="864" height="1536" loading="lazy" decoding="async" sizes="(max-width: 520px) min(400px, calc(100vw - 44px)), (max-width: 800px) calc((100vw - 68px) / 2), 310px" src="assets/screenshots/teacher-ko-864.60ff0e26bde0.webp" srcset="assets/screenshots/teacher-ko-432.577d4381af2d.webp 432w, assets/screenshots/teacher-ko-864.60ff0e26bde0.webp 864w">
           <figcaption data-i18n="gTeacher">선생님은 제자의 연습 기록을 확인하고 숙제를 내요.</figcaption>
         </figure>
       </div>
@@ -444,12 +484,19 @@
 <script>
   // Generated cacheable image map; scripts/sync-store-images.py owns this block.
   /* STORE_IMAGES_START */
-  const STORE_IMAGES = {"en":{"lesson":{"src":"assets/screenshots/lesson-en-864.56e114b03af1.webp","srcset":"assets/screenshots/lesson-en-432.a36710bced1a.webp 432w, assets/screenshots/lesson-en-864.56e114b03af1.webp 864w"},"piece":{"src":"assets/screenshots/piece-en-864.4c9a96f0ff2b.webp","srcset":"assets/screenshots/piece-en-432.d2111285e184.webp 432w, assets/screenshots/piece-en-864.4c9a96f0ff2b.webp 864w"},"progress":{"src":"assets/screenshots/progress-en-864.bf09bf5db373.webp","srcset":"assets/screenshots/progress-en-432.7ed126cfb5a9.webp 432w, assets/screenshots/progress-en-864.bf09bf5db373.webp 864w"},"habit":{"src":"assets/screenshots/habit-en-864.2e2bc8f8ce43.webp","srcset":"assets/screenshots/habit-en-432.b2f728eff564.webp 432w, assets/screenshots/habit-en-864.2e2bc8f8ce43.webp 864w"},"library":{"src":"assets/screenshots/library-en-864.b503a44c0c86.webp","srcset":"assets/screenshots/library-en-432.55f17fc3de99.webp 432w, assets/screenshots/library-en-864.b503a44c0c86.webp 864w"},"myscores":{"src":"assets/screenshots/myscores-en-864.5fcfcd458126.webp","srcset":"assets/screenshots/myscores-en-432.c1269bdd0260.webp 432w, assets/screenshots/myscores-en-864.5fcfcd458126.webp 864w"},"classes":{"src":"assets/screenshots/classes-en-864.54eedb2132ef.webp","srcset":"assets/screenshots/classes-en-432.77a98d149228.webp 432w, assets/screenshots/classes-en-864.54eedb2132ef.webp 864w"},"teacher":{"src":"assets/screenshots/teacher-en-864.89aa00da192f.webp","srcset":"assets/screenshots/teacher-en-432.2d0587e164a4.webp 432w, assets/screenshots/teacher-en-864.89aa00da192f.webp 864w"}},"ko":{"lesson":{"src":"assets/screenshots/lesson-ko-864.1afe85dd321e.webp","srcset":"assets/screenshots/lesson-ko-432.0fb453df35a6.webp 432w, assets/screenshots/lesson-ko-864.1afe85dd321e.webp 864w"},"piece":{"src":"assets/screenshots/piece-ko-864.3f3448689917.webp","srcset":"assets/screenshots/piece-ko-432.2fe84acc845f.webp 432w, assets/screenshots/piece-ko-864.3f3448689917.webp 864w"},"progress":{"src":"assets/screenshots/progress-ko-864.64be8cfb9db8.webp","srcset":"assets/screenshots/progress-ko-432.3e332297cbd7.webp 432w, assets/screenshots/progress-ko-864.64be8cfb9db8.webp 864w"},"habit":{"src":"assets/screenshots/habit-ko-864.4ab2520c6366.webp","srcset":"assets/screenshots/habit-ko-432.50a656b94eca.webp 432w, assets/screenshots/habit-ko-864.4ab2520c6366.webp 864w"},"library":{"src":"assets/screenshots/library-ko-864.8a55eb87b801.webp","srcset":"assets/screenshots/library-ko-432.652216bd10f3.webp 432w, assets/screenshots/library-ko-864.8a55eb87b801.webp 864w"},"myscores":{"src":"assets/screenshots/myscores-ko-864.a2bff688cf51.webp","srcset":"assets/screenshots/myscores-ko-432.17927c3d9631.webp 432w, assets/screenshots/myscores-ko-864.a2bff688cf51.webp 864w"},"classes":{"src":"assets/screenshots/classes-ko-864.2f2994c798f9.webp","srcset":"assets/screenshots/classes-ko-432.6f42e7eca176.webp 432w, assets/screenshots/classes-ko-864.2f2994c798f9.webp 864w"},"teacher":{"src":"assets/screenshots/teacher-ko-864.8f854497adca.webp","srcset":"assets/screenshots/teacher-ko-432.9e3262a7abf7.webp 432w, assets/screenshots/teacher-ko-864.8f854497adca.webp 864w"}}};
+  const STORE_IMAGES = {"en":{"lesson":{"src":"assets/screenshots/lesson-en-864.fe96de225686.webp","srcset":"assets/screenshots/lesson-en-432.89e10e506bb4.webp 432w, assets/screenshots/lesson-en-864.fe96de225686.webp 864w"},"piece":{"src":"assets/screenshots/piece-en-864.bcd668c7fd2c.webp","srcset":"assets/screenshots/piece-en-432.c7287f6161c0.webp 432w, assets/screenshots/piece-en-864.bcd668c7fd2c.webp 864w"},"progress":{"src":"assets/screenshots/progress-en-864.1eb9747a7383.webp","srcset":"assets/screenshots/progress-en-432.5f5fa76e106a.webp 432w, assets/screenshots/progress-en-864.1eb9747a7383.webp 864w"},"habit":{"src":"assets/screenshots/habit-en-864.33449917ccdf.webp","srcset":"assets/screenshots/habit-en-432.d4a9e2538727.webp 432w, assets/screenshots/habit-en-864.33449917ccdf.webp 864w"},"library":{"src":"assets/screenshots/library-en-864.32d3ae9329d1.webp","srcset":"assets/screenshots/library-en-432.f8ca8d33ff3e.webp 432w, assets/screenshots/library-en-864.32d3ae9329d1.webp 864w"},"myscores":{"src":"assets/screenshots/myscores-en-864.5fcfcd458126.webp","srcset":"assets/screenshots/myscores-en-432.c1269bdd0260.webp 432w, assets/screenshots/myscores-en-864.5fcfcd458126.webp 864w"},"classes":{"src":"assets/screenshots/classes-en-864.ddaa111cf6a1.webp","srcset":"assets/screenshots/classes-en-432.6b7e692f4986.webp 432w, assets/screenshots/classes-en-864.ddaa111cf6a1.webp 864w"},"teacher":{"src":"assets/screenshots/teacher-en-864.591171d8ec4b.webp","srcset":"assets/screenshots/teacher-en-432.2a038af304bc.webp 432w, assets/screenshots/teacher-en-864.591171d8ec4b.webp 864w"}},"ko":{"lesson":{"src":"assets/screenshots/lesson-ko-864.31b2b170dbf5.webp","srcset":"assets/screenshots/lesson-ko-432.66071964e710.webp 432w, assets/screenshots/lesson-ko-864.31b2b170dbf5.webp 864w"},"piece":{"src":"assets/screenshots/piece-ko-864.56149db553d2.webp","srcset":"assets/screenshots/piece-ko-432.5150522373d7.webp 432w, assets/screenshots/piece-ko-864.56149db553d2.webp 864w"},"progress":{"src":"assets/screenshots/progress-ko-864.2bee987d4ae8.webp","srcset":"assets/screenshots/progress-ko-432.8a46dca844d6.webp 432w, assets/screenshots/progress-ko-864.2bee987d4ae8.webp 864w"},"habit":{"src":"assets/screenshots/habit-ko-864.834d691290ff.webp","srcset":"assets/screenshots/habit-ko-432.17fd57b0f085.webp 432w, assets/screenshots/habit-ko-864.834d691290ff.webp 864w"},"library":{"src":"assets/screenshots/library-ko-864.803776b22a3e.webp","srcset":"assets/screenshots/library-ko-432.390d0af10876.webp 432w, assets/screenshots/library-ko-864.803776b22a3e.webp 864w"},"myscores":{"src":"assets/screenshots/myscores-ko-864.d76bfb9eac5c.webp","srcset":"assets/screenshots/myscores-ko-432.e9ef29f51a72.webp 432w, assets/screenshots/myscores-ko-864.d76bfb9eac5c.webp 864w"},"classes":{"src":"assets/screenshots/classes-ko-864.ed55f4aa9bf5.webp","srcset":"assets/screenshots/classes-ko-432.d1a5afc05732.webp 432w, assets/screenshots/classes-ko-864.ed55f4aa9bf5.webp 864w"},"teacher":{"src":"assets/screenshots/teacher-ko-864.60ff0e26bde0.webp","srcset":"assets/screenshots/teacher-ko-432.577d4381af2d.webp 432w, assets/screenshots/teacher-ko-864.60ff0e26bde0.webp 864w"}}};
   /* STORE_IMAGES_END */
   // KO/EN text and screenshot selection share applyLang().
   const I18N = {
     en: {
       navClasses: 'Classes', navMyScores: 'My Scores',
+      ebWatch: 'Watch',
+      h2watch: 'See how a lesson goes',
+      ledeWatch: 'Take a quick look, or watch the whole walkthrough.',
+      noteWatch: 'The voice in the walkthrough is AI-generated. Scores shown are examples.',
+      vidShort: 'The short version', vidShortLen: '27 seconds',
+      vidExplain: 'The full walkthrough', vidExplainLen: 'About 3 minutes',
+      vidPlay: 'Play video',
       ebClasses: "Music classes",
       h2classes: "Vibrato, ear training, theory & music history",
       classesIntro: "Read explanations, practice, and answer questions. Ear training, theory and music history also include unit checks to revisit what you learned.",
@@ -520,7 +567,7 @@
       q2: "Do classes use lesson time?", a2: "No. Vibrato, ear training, theory and music history classes, and the Practice Room, do not count toward lesson limits. Lessons using My Scores do use lesson time.",
       q3: 'Are my child’s recordings stored?', a3: "Performance audio and video are not uploaded to our servers. Lesson replays are temporary. Practice Room recordings stay on the device and can be deleted in the app. Save video also puts a copy in Photos, where your photo app settings apply.",
       ftTerms: 'Terms of Use', ftPrivacy: 'Privacy Policy', ftContact: 'Contact',
-      altLesson: 'AI coaching lesson — a violin practice photo and the measures to work on',
+      altLesson: 'Lesson screen — marks on the score after a take',
       altProgress: 'Practice progress — a pentagon of pitch, rhythm, dynamics, tone, and posture scores',
       altPiece: 'Piece detail — Cello Suite No. 1, Prelude with a score preview and Start Lesson button',
       altHome: 'Home screen — an October calendar with goal-complete days marked by stars',
@@ -534,6 +581,30 @@
   // ko 원문 백업 (첫 로드 시 DOM 에서 수집 — 사전 이중 관리 방지). alt 도 같은 방식.
   document.querySelectorAll('[data-i18n]').forEach((el) => { I18N.ko[el.dataset.i18n] = el.innerHTML; });
   document.querySelectorAll('[data-i18n-alt]').forEach((el) => { I18N.ko[el.dataset.i18nAlt] = el.alt; });
+  // 영상은 언어마다 한 벌. 사이트에 직접 둔 파일이라 눌렀을 때만 받고, 외부로 나가는 요청이 없다.
+  const videoOf = (name, lang) => ({ src: `videos/ad-${name}-${lang}.mp4`, poster: `assets/videos/${name}-${lang}.webp` });
+  I18N.ko.vidPlay = '영상 재생';
+  function showPoster(frame, lang) {
+    const v = videoOf(frame.dataset.video, lang);
+    const link = document.createElement('a');
+    link.href = v.src;
+    link.setAttribute('aria-label', `${I18N[lang].vidPlay}: ${I18N[lang][frame.dataset.video === 'short' ? 'vidShort' : 'vidExplain']}`);
+    const img = document.createElement('img');
+    img.src = v.poster; img.alt = ''; img.loading = 'lazy'; img.decoding = 'async'; img.width = 540; img.height = 960;
+    const icon = document.createElement('span');
+    icon.className = 'vid-icon';
+    link.append(img, icon);
+    link.addEventListener('click', (event) => {
+      event.preventDefault();
+      // 한 번에 하나만 소리를 낸다.
+      document.querySelectorAll('.vid-frame video').forEach((other) => other.pause());
+      const video = document.createElement('video');
+      video.src = v.src; video.poster = v.poster; video.controls = true; video.playsInline = true;
+      frame.replaceChildren(video);
+      video.play().catch(() => {});
+    });
+    frame.replaceChildren(link);
+  }
   // 언어 적용을 한 곳으로 — 클릭과 첫 로드가 **같은 경로**를 쓴다.
   //   두 벌로 두면 한쪽만 고쳐질 때 "버튼은 영어인데 본문은 한글" 같은 게 생긴다.
   function applyLang(lang) {
@@ -556,6 +627,7 @@
       const v = I18N[lang][el.dataset.i18nAlt];
       if (v !== undefined) el.alt = v;
     });
+    document.querySelectorAll('[data-video]').forEach((frame) => showPoster(frame, lang));
   }
   document.querySelectorAll('.langs button').forEach((btn) => {
     btn.addEventListener('click', () => applyLang(btn.dataset.lang));
