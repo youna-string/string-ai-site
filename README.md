@@ -39,3 +39,8 @@ Screenshots now come from the 1.0.4 store set (`store-assets/screenshots/out/pla
 
 This branch stays unpublished until the owner says to open: its photos and copy describe 1.0.4.
 
+## Fonts and store buttons — 2026-11-06
+
+No font CDN: the landing page loads Pretendard Regular and Bold from `assets/fonts/` (`scripts/build-fonts.mjs` packs the app's OTF files as WOFF2 with Node's own Brotli, no subsetting, SIL OFL licence alongside). The weights map as 400-500 to Regular and 600-900 to Bold. The consent and reset-password pages use the system font, like `consent/verified`. Visitors make no request to Google Fonts or jsDelivr.
+
+The store buttons are plain text with no logo. Apple says not to use the standalone Apple logo and to use only its own badge artwork; Google says the Play icon should not appear in marketing and to use the badge. To add the official badges later, use the unmodified files from Apple's marketing guidelines and Google's Partner Marketing Hub, with the Apple credit line in the footer.
