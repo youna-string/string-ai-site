@@ -138,13 +138,13 @@
   .lede { color: var(--muted); max-width: 40em; }
 
   /* ── 시그니처 3종: 설명(이미지는 여섯 패널에 한 번씩) ── */
-  .feats { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 18px; margin-top: 36px; }
+  .feats { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(270px, 100%), 1fr)); gap: 18px; margin-top: 36px; }
   .feat { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px 18px 24px; }
   .feat h3 { font-size: var(--fs-lg); margin: 16px 6px 8px; }
   .feat p { color: var(--muted); font-size: var(--fs-base); margin: 0 6px; }
 
   /* ── 절차 4단계 ── */
-  .steps { counter-reset: step; display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 16px; margin-top: 34px; }
+  .steps { counter-reset: step; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(210px, 100%), 1fr)); gap: 16px; margin-top: 34px; }
   .step { border-left: 2px solid var(--accent); padding: 4px 0 4px 18px; }
   .step h3 { font-size: var(--fs-base); margin-bottom: 6px; }
   .step h3::before { counter-increment: step; content: counter(step) '. '; color: var(--accent-ink); }
@@ -165,7 +165,7 @@
   .quiet-list li b { color: var(--ink); }
 
   /* ── 가격 ── */
-  .plans { display: grid; grid-template-columns: repeat(auto-fit, minmax(215px, 1fr)); gap: 14px; margin-top: 34px; }
+  .plans { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(215px, 100%), 1fr)); gap: 14px; margin-top: 34px; }
   .plan { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 22px 20px; position: relative; }
   .plan.pick { border-color: var(--accent); box-shadow: var(--shadow); }
   .plan h3 { font-size: var(--fs-base); }
