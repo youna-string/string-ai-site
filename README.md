@@ -24,3 +24,9 @@ The script also owns the marked image map and six static image URLs in `index.ht
 - The lesson uses the approved student photo and actual iPhone Done pixels. The composition recipe and original source hashes live in the app repository; no replacement app controls were invented. All 12 canonical PNG hashes are recorded in the website manifest.
 - The approved Korean and English privacy copy distinguishes temporary lesson media from Practice Room videos the user saves on-device. No performance audio or video is uploaded by this image update.
 - Publishing follows this repository's existing GitHub Pages main-branch deployment. This does not submit app builds, store screenshots, or OTA updates.
+
+## Fonts and store buttons — 2026-11-06
+
+No font CDN: the landing page loads Pretendard Regular and Bold from `assets/fonts/` (`scripts/build-fonts.mjs` packs the app's OTF files as WOFF2 with Node's own Brotli, no subsetting, SIL OFL licence alongside). The weights map as 400-500 to Regular and 600-900 to Bold. The consent and reset-password pages use the system font, like `consent/verified`. Visitors make no request to Google Fonts or jsDelivr.
+
+The store buttons are plain text with no logo. Apple says not to use the standalone Apple logo and to use only its own badge artwork; Google says the Play icon should not appear in marketing and to use the badge. To add the official badges later, use the unmodified files from Apple's marketing guidelines and Google's Partner Marketing Hub, with the Apple credit line in the footer.

@@ -17,7 +17,7 @@ from pathlib import Path
 from PIL import Image
 
 ROOT = Path(__file__).resolve().parents[1]
-PANELS = ("lesson", "mission", "piece", "progress", "habit", "library")
+PANELS = ("lesson", "piece", "progress", "habit", "library")
 WIDTHS = (432, 864)
 
 
@@ -92,8 +92,8 @@ def main() -> None:
         return tag[:-1] + f' src="{shot["src"]}" srcset="{shot["srcset"]}">'
 
     html, count = re.subn(r'<img\b[^>]*data-panel="[^"]+"[^>]*>', replace_img, html)
-    if count != 6:
-        raise ValueError(f"Expected six unique screenshot elements, found {count}")
+    if count != len(PANELS):
+        raise ValueError(f"Expected {len(PANELS)} unique screenshot elements, found {count}")
     html, count = re.subn(
         r'/\* STORE_IMAGES_START \*/.*?/\* STORE_IMAGES_END \*/',
         '/* STORE_IMAGES_START */\n  const STORE_IMAGES = ' +
