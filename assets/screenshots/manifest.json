@@ -3,7 +3,7 @@
   "sources": {
     "en/lesson": {
       "path": "store-assets/screenshots/out/play-phone/en/01_lesson.png",
-      "sha256": "37fcd584baa896b186382b5dcb9969a6ceb46f7ce5259370c185cd0a97c46b53",
+      "sha256": "e5036a66c9783ff9f3f5c82df0ed6c8a67dd7be5a89205ea4774bdbb6135a5f1",
       "width": 1080,
       "height": 1920
     },
@@ -15,7 +15,7 @@
     },
     "en/progress": {
       "path": "store-assets/screenshots/out/play-phone/en/03_progress.png",
-      "sha256": "f7ded58879bd59c59e111c05f0c635278dfedc694a0a1c668b9c6f42a1040d95",
+      "sha256": "6b33b54750fbe76ff458a86766ec30964e2754a2892bc7ca5db80d5ee6db0e07",
       "width": 1080,
       "height": 1920
     },
@@ -39,7 +39,7 @@
     },
     "en/classes": {
       "path": "store-assets/screenshots/out/play-phone/en/07_classes.png",
-      "sha256": "641d6e40f7b54a7863aa22f263e3d11597f237ad281122627bbaa9dd3d6a7c58",
+      "sha256": "de1a4d01cd998054021b820ca2dd1dbf44cf0b041bae2afd8b220b445eaeb991",
       "width": 1080,
       "height": 1920
     },
@@ -63,7 +63,7 @@
     },
     "ko/progress": {
       "path": "store-assets/screenshots/out/play-phone/ko/03_progress.png",
-      "sha256": "77932880e8a41c112965bec3cfb836f134f168230be0bd5c662ec26e5a9139ee",
+      "sha256": "35dc7acd9759b29cf8a1ed76216fb236bcad1d5d8d620a7b3590c2169de39d75",
       "width": 1080,
       "height": 1920
     },
@@ -87,7 +87,7 @@
     },
     "ko/classes": {
       "path": "store-assets/screenshots/out/play-phone/ko/07_classes.png",
-      "sha256": "ec528d26adbb4d5353ff57905302c7e8e8987943af53a2fc8fdb020df76e864a",
+      "sha256": "8c379d8bdd8fa4f5dfa757d86322025d2cbe8ae8a08df5ab0b5e670dcbefa44e",
       "width": 1080,
       "height": 1920
     },
@@ -101,16 +101,16 @@
   "variants": {
     "en": {
       "lesson": {
-        "src": "assets/screenshots/lesson-en-864.fe96de225686.webp",
-        "srcset": "assets/screenshots/lesson-en-432.89e10e506bb4.webp 432w, assets/screenshots/lesson-en-864.fe96de225686.webp 864w"
+        "src": "assets/screenshots/lesson-en-864.4f42015a4b45.webp",
+        "srcset": "assets/screenshots/lesson-en-432.5523c5dec6a6.webp 432w, assets/screenshots/lesson-en-864.4f42015a4b45.webp 864w"
       },
       "piece": {
         "src": "assets/screenshots/piece-en-864.bcd668c7fd2c.webp",
         "srcset": "assets/screenshots/piece-en-432.c7287f6161c0.webp 432w, assets/screenshots/piece-en-864.bcd668c7fd2c.webp 864w"
       },
       "progress": {
-        "src": "assets/screenshots/progress-en-864.1eb9747a7383.webp",
-        "srcset": "assets/screenshots/progress-en-432.5f5fa76e106a.webp 432w, assets/screenshots/progress-en-864.1eb9747a7383.webp 864w"
+        "src": "assets/screenshots/progress-en-864.f51f97611f91.webp",
+        "srcset": "assets/screenshots/progress-en-432.90e345803740.webp 432w, assets/screenshots/progress-en-864.f51f97611f91.webp 864w"
       },
       "habit": {
         "src": "assets/screenshots/habit-en-864.33449917ccdf.webp",
@@ -125,8 +125,8 @@
         "srcset": "assets/screenshots/myscores-en-432.c1269bdd0260.webp 432w, assets/screenshots/myscores-en-864.5fcfcd458126.webp 864w"
       },
       "classes": {
-        "src": "assets/screenshots/classes-en-864.ddaa111cf6a1.webp",
-        "srcset": "assets/screenshots/classes-en-432.6b7e692f4986.webp 432w, assets/screenshots/classes-en-864.ddaa111cf6a1.webp 864w"
+        "src": "assets/screenshots/classes-en-864.b78fb81e5335.webp",
+        "srcset": "assets/screenshots/classes-en-432.598a10a7ac0a.webp 432w, assets/screenshots/classes-en-864.b78fb81e5335.webp 864w"
       },
       "teacher": {
         "src": "assets/screenshots/teacher-en-864.591171d8ec4b.webp",
@@ -143,8 +143,8 @@
         "srcset": "assets/screenshots/piece-ko-432.5150522373d7.webp 432w, assets/screenshots/piece-ko-864.56149db553d2.webp 864w"
       },
       "progress": {
-        "src": "assets/screenshots/progress-ko-864.2bee987d4ae8.webp",
-        "srcset": "assets/screenshots/progress-ko-432.8a46dca844d6.webp 432w, assets/screenshots/progress-ko-864.2bee987d4ae8.webp 864w"
+        "src": "assets/screenshots/progress-ko-864.7452fd0ef06a.webp",
+        "srcset": "assets/screenshots/progress-ko-432.40afcaecfd30.webp 432w, assets/screenshots/progress-ko-864.7452fd0ef06a.webp 864w"
       },
       "habit": {
         "src": "assets/screenshots/habit-ko-864.834d691290ff.webp",
@@ -159,8 +159,8 @@
         "srcset": "assets/screenshots/myscores-ko-432.e9ef29f51a72.webp 432w, assets/screenshots/myscores-ko-864.d76bfb9eac5c.webp 864w"
       },
       "classes": {
-        "src": "assets/screenshots/classes-ko-864.ed55f4aa9bf5.webp",
-        "srcset": "assets/screenshots/classes-ko-432.d1a5afc05732.webp 432w, assets/screenshots/classes-ko-864.ed55f4aa9bf5.webp 864w"
+        "src": "assets/screenshots/classes-ko-864.5b188194cfb8.webp",
+        "srcset": "assets/screenshots/classes-ko-432.8ec736d18258.webp 432w, assets/screenshots/classes-ko-864.5b188194cfb8.webp 864w"
       },
       "teacher": {
         "src": "assets/screenshots/teacher-ko-864.60ff0e26bde0.webp",
