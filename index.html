@@ -16,11 +16,12 @@
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="String AI: Violin · Viola · Cello | 바이올린 · 비올라 · 첼로">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+  /* Fonts are files on this site (scripts/build-fonts.mjs, Pretendard, SIL OFL: assets/fonts/PRETENDARD-LICENSE-OFL.txt), so a visit makes no request to a font CDN. */
+  @font-face { font-family: Pretendard; font-style: normal; font-weight: 400 500; font-display: swap; src: url('assets/fonts/Pretendard-Regular.woff2') format('woff2'); }
+  @font-face { font-family: Pretendard; font-style: normal; font-weight: 600 900; font-display: swap; src: url('assets/fonts/Pretendard-Bold.woff2') format('woff2'); }
+</style>
 <link rel="icon" href="assets/screenshots/icon.ecf6ef3f0778.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap">
 <style>
   /* 단일 룩 확정 (2026-08-21 사용자: "실제 앱 색깔 느낌으로")
      = 앱의 크림 라이트 팔레트(src/theme/colors.ts 미러)로 고정. 다크 변형 없음 —
@@ -129,7 +130,6 @@
     transition: transform 0.15s ease;
   }
   .store-btn:hover { transform: translateY(-1px); }
-  .store-btn svg { width: 20px; height: 20px; fill: currentColor; }
   .trust { display: flex; gap: 14px; color: var(--muted); font-size: var(--fs-sm); align-items: center; flex-wrap: wrap; justify-content: center; }
   /* Store posters already contain the approved gold halo and device frame. */
   .poster { min-width: 0; text-align: center; }
@@ -214,6 +214,7 @@
   /* ── 푸터 ── */
   footer { border-top: 1px solid var(--line); padding: 42px 0 60px; color: var(--muted); font-size: var(--fs-sm); }
   footer .links { display: flex; gap: 18px; flex-wrap: wrap; margin-bottom: 14px; }
+  footer .tm { margin-top: 6px; font-size: var(--fs-xs); }
 </style>
 </head>
 <body>
@@ -241,13 +242,11 @@
              지역 무관 형태라 한국/미국 어느 쪽에서 열어도 그 나라 스토어로 감. -->
         <div class="store-btns">
           <a class="store-btn" href="https://apps.apple.com/app/id6787829281" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.05 20.28c-.98.95-2.05.86-3.08.38-1.09-.5-2.08-.53-3.2 0-1.44.62-2.2.44-3.06-.38C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.75 3.08.8.79-.16 2.31-.93 3.9-.79 1.36.11 2.59.62 3.42 1.72-3.14 1.88-2.63 5.95.53 7.14-.63 1.62-1.45 3.22-2.93 4.1zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/></svg>
             <span data-i18n="ctaStore">App Store에서 다운로드</span>
           </a>
           <!-- Google Play (2026-08-29 추가). package = com.stringai.practice — 리스팅 생존 실측(HTTP 200).
                지역 무관 형태라 어느 나라에서 열어도 그 나라 스토어로 간다. -->
           <a class="store-btn" href="https://play.google.com/store/apps/details?id=com.stringai.practice" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.6 1.81c-.31.33-.49.83-.49 1.48v17.42c0 .65.18 1.15.49 1.48l.6.06 9.76-9.76v-.23L3.6 1.81zM17.05 15.9l-3.09-3.09v-.23l3.09-3.09.07.04 3.66 2.08c1.05.59 1.05 1.57 0 2.17l-3.66 2.08-.7.04zM16.13 16.9 12.97 13.7 3.6 23.06c.35.37.92.41 1.57.05l10.96-6.21M16.13 7.1 5.17.89C4.52.53 3.95.58 3.6.95l9.37 9.35L16.13 7.1z"/></svg>
             <span data-i18n="ctaPlay">Google Play에서 다운로드</span>
           </a>
         </div>
@@ -317,7 +316,7 @@
       <div class="steps">
         <div class="step"><h3 data-i18n="s1h">조율</h3><p data-i18n="s1p">바늘을 보며 현 네 줄을 맞추면 레슨이 시작돼요.</p></div>
         <div class="step"><h3 data-i18n="s2h">계획</h3><p data-i18n="s2p">연습 기록과 목표 날짜를 보고 String AI가 오늘 연습할 범위를 정해요.</p></div>
-        <div class="step"><h3 data-i18n="s3h">미션</h3><p data-i18n="s3p">연습이 필요한 마디만 몇 마디씩 잘라 반복해요. 내 연주와 참고 연주도 다시 들을 수 있어요.</p></div>
+        <div class="step"><h3 data-i18n="s3h">미션</h3><p data-i18n="s3p">연습이 필요한 마디만 몇 마디씩 잘라 반복해요. 내 연주와 참고 음원도 다시 들을 수 있어요.</p></div>
         <div class="step"><h3 data-i18n="s4h">리포트</h3><p data-i18n="s4p">요소별 점수가 쌓이고, 달력·인증서·배지에 연습이 남아요.</p></div>
       </div>
     </div>
@@ -363,7 +362,7 @@
       <div class="gallery">
         <figure class="poster">
           <img data-panel="piece" data-i18n-alt="altPiece" alt="곡 상세 — Cello Suite No. 1, Prelude의 악보 미리보기와 레슨 시작 버튼" width="864" height="1536" loading="lazy" decoding="async" sizes="(max-width: 520px) min(400px, calc(100vw - 44px)), (max-width: 800px) calc((100vw - 68px) / 2), 310px" src="assets/screenshots/piece-ko-864.56149db553d2.webp" srcset="assets/screenshots/piece-ko-432.5150522373d7.webp 432w, assets/screenshots/piece-ko-864.56149db553d2.webp 864w">
-          <figcaption data-i18n="g1">곡마다 악보·참고 연주·연습 계획이 함께 있어요.</figcaption>
+          <figcaption data-i18n="g1">곡마다 악보·참고 음원·연습 계획이 함께 있어요.</figcaption>
         </figure>
         <figure class="poster">
           <img data-panel="progress" data-i18n-alt="altProgress" alt="연습 진도 — 음정·박자·셈여림·음색·자세 점수 오각형" width="864" height="1536" loading="lazy" decoding="async" sizes="(max-width: 520px) min(400px, calc(100vw - 44px)), (max-width: 800px) calc((100vw - 68px) / 2), 310px" src="assets/screenshots/progress-ko-864.7452fd0ef06a.webp" srcset="assets/screenshots/progress-ko-432.40afcaecfd30.webp 432w, assets/screenshots/progress-ko-864.7452fd0ef06a.webp 864w">
@@ -479,6 +478,7 @@
       <a href="mailto:stringaiapp@gmail.com" data-i18n="ftContact">문의</a>
     </div>
     <p>© 2026 String AI</p>
+    <p class="tm" data-i18n="ftTm">App Store는 Apple Inc.의 서비스 마크이고, Google Play는 Google LLC의 상표입니다.</p>
   </div>
 </footer>
 
@@ -537,11 +537,11 @@
       eb2: 'How it works', h2how: 'How a lesson flows',
       s1h: 'Tune', s1p: 'Tune all four strings with the needle and the lesson begins.',
       s2h: 'Plan', s2p: 'String AI picks today’s range from your history and goal date.',
-      s3h: 'Mission', s3p: 'Repeat only the measures that need work, a few at a time. You can replay your take and a reference recording.',
+      s3h: 'Mission', s3p: 'Repeat only the measures that need work, a few at a time. You can replay your take and reference audio.',
       s4h: 'Report', s4p: 'Scores build up day by day, and your practice shows in the calendar, certificates, and badges.',
       eb6: 'In the app', h2shots: 'A quick look inside',
       gProgress: "Review your 5-axis scores together.",
-      g1: 'Every piece comes with its score, a reference recording, and a plan.',
+      g1: 'Every piece comes with its score, reference audio, and a plan.',
       g2: 'Practice days fill the calendar. Twenty gold days in a month earns a certificate.',
       g3: 'Each instrument has its own scales, etudes and pieces, and the library keeps growing.',
       gMyScores: 'Bring in your printed part as a photo or PDF and practice it.',
@@ -567,7 +567,7 @@
       q1: 'Which instruments are supported?', a1: 'Violin, viola, and cello — each with its own library of scales, etudes, and pieces, growing steadily.',
       q2: "Do classes use lesson time?", a2: "No. Vibrato, ear training, theory and music history classes, and the Practice Room, do not count toward lesson limits. Lessons using My Scores do use lesson time.",
       q3: 'Are my child’s recordings stored?', a3: "Performance audio and video are not uploaded to our servers. Lesson replays are temporary. Practice Room recordings stay on the device and can be deleted in the app. Save video also puts a copy in Photos, where your photo app settings apply.",
-      ftTerms: 'Terms of Use', ftPrivacy: 'Privacy Policy', ftHealth: 'Consumer Health Data Privacy Policy', ftContact: 'Contact',
+      ftTm: 'App Store is a service mark of Apple Inc., registered in the U.S. and other countries. Google Play is a trademark of Google LLC.', ftTerms: 'Terms of Use', ftPrivacy: 'Privacy Policy', ftHealth: 'Consumer Health Data Privacy Policy', ftContact: 'Contact',
       altLesson: 'Lesson screen — marks on the score after a take',
       altProgress: 'Practice progress — a pentagon of pitch, rhythm, dynamics, tone, and posture scores',
       altPiece: 'Piece detail — Cello Suite No. 1, Prelude with a score preview and Start Lesson button',
